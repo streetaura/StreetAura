@@ -302,6 +302,13 @@
         <button class="checkout-btn" id="checkout-btn" onclick="checkout()" disabled>Proceed to Checkout</button>
     </div>
 </div>
+    <div id="cart" class="cart">
+    <h3>Your Cart</h3>
+    <div id="cart-items"></div>
+    <button class="btn" id="checkout-btn" onclick="checkout()" disabled>Proceed to Checkout</button>
+    <!-- Close Button -->
+    <button class="btn" onclick="closeCart()">Close Cart</button>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 <script>
@@ -365,6 +372,15 @@
             window.location.href = '/checkout'; 
         }
     </script>
+    <script>
+    // Function to close the cart
+    function closeCart() {
+        const cartSection = document.getElementById('cart');
+        cartSection.classList.remove('open'); // Remove 'open' class to hide the cart
+        swiper.enable(); // Re-enable swiper when cart is closed
+    }
+</script>
+
 </body>
 </html>
 
