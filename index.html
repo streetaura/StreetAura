@@ -378,6 +378,9 @@ visibility: visible;
 <button class="btn" id="exitCheckoutButton" onclick="exitCheckout()">Exit Checkout</button>
 </div>
 
+<!-- Notification -->
+<div id="notification">Product added to cart!</div>
+
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 <script>
 const swiper = new Swiper('.swiper-container', {
@@ -396,7 +399,7 @@ el: '.swiper-pagination',
 clickable: true,
 },
 });
-
+  
 let cart = [];
 
 <!-- Modal for Enlarged Image -->
