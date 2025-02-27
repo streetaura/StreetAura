@@ -35,7 +35,6 @@
 
         .cart {
             color: #fff;
-            cursor: pointer;
         }
 
         .swiper {
@@ -86,18 +85,6 @@
             background: #ddd;
         }
 
-        .contact-us {
-            margin-top: 3rem;
-            padding: 2rem;
-            background-color: #111;
-            text-align: center;
-        }
-
-        .contact-us h2 {
-            margin-bottom: 1rem;
-        }
-
-          /* Cart Slide-in */
         #cart {
             position: fixed;
             top: 0;
@@ -105,8 +92,8 @@
             width: 300px;
             height: 100%;
             background-color: #111;
-            transition: right 0.3s ease; /* Smooth transition */
-            z-index: 1000; /* Make sure the cart is on top of everything */
+            transition: right 0.3s ease;
+            z-index: 1000;
             padding: 2rem;
             overflow-y: auto;
         }
@@ -115,7 +102,6 @@
             right: 0; /* Cart slides in */
         }
 
-        /* Cart Item Styles */
         .cart-item {
             display: flex;
             align-items: center;
@@ -158,36 +144,37 @@
     </style>
 </head>
 <body>
-<nav class="navbar">
-    <a href="#" class="logo">
-        <img src="https://i.ibb.co/tTX4bHnN/6152-B7-CA-A2-FC-4448-99-BD-1-D1-E4-D4-DC434.jpg" alt="Street Aura Logo">
-    </a>
-    <div class="nav-links">
-        <a href="#shop">Shop</a>
-        <a href="#categories">Categories</a>
-        <a href="#about">About</a>
-        <a href="#contact-us">Contact Us</a>
-    </div>
-    <div class="cart" onclick="viewCart()">Cart (<span id="cart-count">0</span>)</div>
-</nav>
-
-<h1>Welcome to Street Aura</h1>
-<p>Discover the latest urban streetwear collections.</p>
-
-<!-- Improved Swiper with navigation buttons -->
-<div class="swiper-container">
-    <div class="swiper">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="https://i.ibb.co/yBkqQRPZ/Untitled-design-1.png" alt="T-Shirt 1"></div>
-            <div class="swiper-slide"><img src="https://i.ibb.co/gbyysTrv/Untitled-design-2.png" alt="Limited Edition"></div>
-            <div class="swiper-slide"><img src="https://i.ibb.co/4ZbJzcdr/Untitled-design-3.png" alt="Dino Tee"></div>
-            <div class="swiper-slide"><img src="https://i.ibb.co/9md7jrVm/Untitled-design.png" alt="Street Wear"></div>
+    <nav class="navbar">
+        <a href="#" class="logo">
+            <img src="https://i.ibb.co/tTX4bHnN/6152-B7-CA-A2-FC-4448-99-BD-1-D1-E4-D4-DC434.jpg" alt="Street Aura Logo">
+        </a>
+        <div class="nav-links">
+            <a href="#shop">Shop</a>
+            <a href="#categories">Categories</a>
+            <a href="#about">About</a>
+            <a href="#contact-us">Contact Us</a>
         </div>
-        <div class="swiper-pagination"></div>
+        <div class="cart">
+            <a href="#" onclick="viewCart()">Cart (<span id="cart-count">0</span>)</a>
+        </div>
+    </nav>
+
+    <h1>Welcome to Street Aura</h1>
+    <p>Discover the latest urban streetwear collections.</p>
+
+    <div class="swiper-container">
+        <div class="swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="https://i.ibb.co/yBkqQRPZ/Untitled-design-1.png" alt="T-Shirt 1"></div>
+                <div class="swiper-slide"><img src="https://i.ibb.co/gbyysTrv/Untitled-design-2.png" alt="Limited Edition"></div>
+                <div class="swiper-slide"><img src="https://i.ibb.co/4ZbJzcdr/Untitled-design-3.png" alt="Dino Tee"></div>
+                <div class="swiper-slide"><img src="https://i.ibb.co/9md7jrVm/Untitled-design.png" alt="Street Wear"></div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
     </div>
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
-</div>
 
 <section id="shop">
     <h2>Shop Our Collection</h2>
