@@ -160,54 +160,6 @@
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>
     </div>
-    
-    <section id="shop">
-        <h2>Shop Our Collection</h2>
-        <div class="product-grid" id="productGrid">
-            <!-- Product 1 -->
-            <div class="product" data-category="tshirts" onclick="openModal('https://i.ibb.co/yFvBrnBh/Untitled-design-1.png')">
-                <img src="https://i.ibb.co/yFvBrnBh/Untitled-design-1.png" alt="Fearless master">
-                <h3>Fearless master</h3>
-                <p>$39.99</p>
-                <button class="btn" onclick="addToCart('Fearless master', 39.99, 'https://i.ibb.co/yFvBrnBh/Untitled-design-1.png')">Add to Cart</button>
-            </div>
-            <!-- More products here... -->
-        </div>
-    </section>
-
-    <!-- Modal for Enlarged Image -->
-    <div id="imageModal" class="modal" style="display:none;">
-        <img id="modalImage" src="" alt="Product Image">
-        <button id="modalClose" onclick="closeModal()">X</button>
-    </div>
-
-    <script>
-        function openModal(imageUrl) {
-            const modal = document.getElementById('imageModal');
-            const modalImage = document.getElementById('modalImage');
-            modal.style.display = 'flex';
-            modalImage.src = imageUrl;
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('imageModal');
-            modal.style.display = 'none';
-        }
-
-        var swiper = new Swiper('.swiper', {
-            loop: true,
-            spaceBetween: 10,
-            slidesPerView: 1,
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-        });
-
 
    <section id="shop">
     <h2>Shop Our Collection</h2>
@@ -306,74 +258,24 @@
     </div>
 </section>
 
-<script>
-    // Function to open the modal
-    function openModal(imageUrl) {
-        const modal = document.getElementById('imageModal');
-        const modalImage = document.getElementById('modalImage');
-        modal.style.display = 'flex';
-        modalImage.src = imageUrl;
-    }
+ <!-- Modal for Enlarged Image -->
+    <div id="imageModal" class="modal" style="display:none;">
+        <img id="modalImage" src="" alt="Product Image">
+        <button id="modalClose" onclick="closeModal()">X</button>
+    </div>
 
-    // Close the modal
-    function closeModal() {
-        const modal = document.getElementById('imageModal');
-        modal.style.display = 'none';
-    }
+    <!-- Cart Container -->
+    <div id="cart" class="cart-container">
+        <h3>Your Cart</h3>
+        <div id="cart-items"></div>
+        <button class="checkout-btn" id="checkout-btn" onclick="checkout()" disabled>Proceed to Checkout</button>
+        <button class="close-cart-btn" onclick="closeCart()">X</button>
+    </div>
 
-    // Add to cart function
-    function addToCart(event, name, price, imgUrl) {
-        event.stopPropagation(); // Prevent image click and add-to-cart button click from triggering both
-        cart.push({ name, price, imgUrl });
-        updateCart();
-        viewCart();
-    }
-
-    let cart = [];
-
-    // Update the cart content dynamically
-    function updateCart() {
-        const cartDetails = document.getElementById('cart-items');
-        cartDetails.innerHTML = ''; // Clear existing cart items
-        cart.forEach(item => {
-            const cartItem = document.createElement('div');
-            cartItem.classList.add('cart-item');
-            cartItem.innerHTML = `
-                <img src="${item.imgUrl}" alt="${item.name}">
-                <p>${item.name} - $${item.price}</p>
-                <span class="remove" onclick="removeFromCart('${item.name}')">X</span>
-            `;
-            cartDetails.appendChild(cartItem);
-        });
-        document.getElementById('checkout-btn').disabled = cart.length === 0;
-    }
-
-    // Remove item from the cart
-    function removeFromCart(name) {
-        cart = cart.filter(item => item.name !== name);
-        updateCart();
-    }
-
-    // Open the cart
-    function viewCart() {
-        const cartSection = document.getElementById('cart');
-        cartSection.style.display = 'block';
-    }
-
-    // Close the cart
-    function closeCart() {
-        const cartSection = document.getElementById('cart');
-        cartSection.style.display = 'none';
-    }
-
-    // Checkout function
-    function checkout() {
-        alert('Proceeding to checkout!');
-        window.location.href = '/checkout'; 
-    }
-            
+    <script>
         let cart = [];
 
+        // Function to open the modal
         function openModal(imageUrl) {
             const modal = document.getElementById('imageModal');
             const modalImage = document.getElementById('modalImage');
@@ -381,20 +283,24 @@
             modalImage.src = imageUrl;
         }
 
+        // Close the modal
         function closeModal() {
             const modal = document.getElementById('imageModal');
             modal.style.display = 'none';
         }
 
-        function addToCart(name, price, imgUrl) {
+        // Add to cart function
+        function addToCart(event, name, price, imgUrl) {
+            event.stopPropagation(); // Prevent image click and add-to-cart button click from triggering both
             cart.push({ name, price, imgUrl });
             updateCart();
             viewCart();
         }
 
+        // Update the cart content dynamically
         function updateCart() {
             const cartDetails = document.getElementById('cart-items');
-            cartDetails.innerHTML = '';
+            cartDetails.innerHTML = ''; // Clear existing cart items
             cart.forEach(item => {
                 const cartItem = document.createElement('div');
                 cartItem.classList.add('cart-item');
@@ -405,48 +311,47 @@
                 `;
                 cartDetails.appendChild(cartItem);
             });
-
             document.getElementById('checkout-btn').disabled = cart.length === 0;
         }
 
+        // Remove item from the cart
         function removeFromCart(name) {
             cart = cart.filter(item => item.name !== name);
             updateCart();
         }
 
+        // Open the cart
         function viewCart() {
             const cartSection = document.getElementById('cart');
             cartSection.style.display = 'block';
         }
 
+        // Close the cart
         function closeCart() {
             const cartSection = document.getElementById('cart');
             cartSection.style.display = 'none';
         }
 
+        // Checkout function
         function checkout() {
             alert('Proceeding to checkout!');
-            window.location.href = '/checkout'; 
+            window.location.href = '/checkout'; // Redirect to checkout page
         }
+
+        var swiper = new Swiper('.swiper', {
+            loop: true,
+            spaceBetween: 10,
+            slidesPerView: 1,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
     </script>
 </body>
 
-</html>
-ection.style.display = 'none';
-        }
-
-        function checkout() {
-            alert('Proceeding to checkout!');
-            window.location.href = '/checkout'; 
-        }
-    </script>
-
-    <!-- Cart Container -->
-    <div id="cart" class="cart-container">
-        <h3>Your Cart</h3>
-        <div id="cart-items"></div>
-        <button class="checkout-btn" id="checkout-btn" onclick="checkout()" disabled>Proceed to Checkout</button>
-        <button class="close-cart-btn" onclick="closeCart()">X</button>
-    </div>
-</body>
 </html>
