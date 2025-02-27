@@ -19,7 +19,6 @@ text-align: center;
 padding: 20px;
 background-color: #333;
 color: white;
-margin: 0;
 }
 
 /* Logo */
@@ -400,6 +399,44 @@ clickable: true,
 
 let cart = [];
 
+<!-- Modal for Enlarged Image -->
+<div id="imageModal" class="modal" style="display:none;">
+<img id="modalImage" src="" alt="Product Image">
+<button id="modalClose" onclick="closeModal()">X</button>
+</div>
+
+<!-- Cart Container -->
+<div id="cart" class="cart-container">
+<h3>Your Cart</h3>
+<div id="cart-items"></div>
+<button class="btn" id="checkoutButton" onclick="proceedToCheckout()">Checkout</button>
+<button class="btn" id="exitCheckoutButton" onclick="exitCheckout()">Exit Checkout</button>
+</div>
+
+<!-- Notification -->
+<div id="notification">Product added to cart!</div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+<script>
+const swiper = new Swiper('.swiper-container', {
+slidesPerView: 3,
+spaceBetween: 10,
+autoplay: {
+delay: 3000, // 3 seconds
+disableOnInteraction: false, // Keeps autoplay even after user interaction
+},
+navigation: {
+nextEl: '.swiper-button-next',
+prevEl: '.swiper-button-prev',
+},
+pagination: {
+el: '.swiper-pagination',
+clickable: true,
+},
+});
+
+let cart = [];
+
 function addToCart(event, productName, productPrice, productImage) {
 event.stopPropagation();
 cart.push({
@@ -408,9 +445,9 @@ price: productPrice,
 image: productImage
 });
 updateCart();
-showNotification(productName); // Show the notification when a product is added
+showNotification(productName);  // Show the notification when a product is added
 }
-    
+
 function updateCart() {
 const cartItemsContainer = document.getElementById('cart-items');
 cartItemsContainer.innerHTML = '';
@@ -426,7 +463,7 @@ cartItemsContainer.appendChild(itemDiv);
 });
 }
 
-    function showNotification(productName) {
+function showNotification(productName) {
 const notification = document.getElementById('notification');
 notification.textContent = `${productName} added to cart!`;
 notification.classList.add('show');
@@ -436,12 +473,6 @@ setTimeout(() => {
 notification.classList.remove('show');
 }, 3000);
 }
-
-function toggleCart() {
-const cartContainer = document.getElementById('cart');
-cartContainer.style.display = cartContainer.style.display === 'block' ? 'none' : 'block';
-}
-
 
 function openModal(imageSrc) {
 const modal = document.getElementById('imageModal');
@@ -462,35 +493,21 @@ const modalImage = document.getElementById('modalImage');
 modalImage.classList.remove('expanded');
 }
 
-function openCheckout() {
-// Hide the cart and show the checkout section
-document.getElementById('cart').style.display = 'none';
-document.getElementById('checkoutSection').style.display = 'block';
-
-// Update checkout section with cart items
-const checkoutItemsContainer = document.getElementById('checkoutItems');
-checkoutItemsContainer.innerHTML = '';
-let total = 0;
-cart.forEach(item => {
-const itemDiv = document.createElement('div');
-itemDiv.innerHTML = `${item.name} - $${item.price.toFixed(2)}`;
-checkoutItemsContainer.appendChild(itemDiv);
-total += item.price;
-});
-document.getElementById('totalAmount').innerText = total.toFixed(2);
+// Show Cart when clicking the cart button
+function toggleCart() {
+const cartContainer = document.getElementById('cart');
+cartContainer.style.display = cartContainer.style.display === 'block' ? 'none' : 'block';
 }
 
-function completeCheckout() {
-alert('Thank you for your purchase!');
-cart = []; // Clear the cart
-updateCart();
-document.getElementById('checkoutSection').style.display = 'none';
+// Show Checkout page when clicking Checkout button
+function proceedToCheckout() {
+alert('Proceeding to checkout');
 }
 
-function cancelCheckout() {
-// Close checkout and return to shopping
-document.getElementById('checkoutSection').style.display = 'none';
-document.getElementById('cart').style.display = 'block';
+// Hide Cart when clicking Exit Checkout button
+function exitCheckout() {
+const cartContainer = document.getElementById('cart');
+cartContainer.style.display = 'none';
 }
 </script>
 </body>
