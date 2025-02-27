@@ -271,11 +271,16 @@
 
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-    function addToCart(product) {
+    function addToCart(productName, productPrice) {
+        const product = {
+            name: productName,
+            price: productPrice,
+        };
+
         cart.push(product);
         localStorage.setItem("cart", JSON.stringify(cart));
         updateCartCount();
-        alert(`${product} added to cart!`);
+        alert(`${productName} added to cart!`);
     }
 
     function updateCartCount() {
@@ -284,7 +289,13 @@
     }
 
     function viewCart() {
-        alert('Viewing Cart: ' + cart.join(', '));
+        if (cart.length === 0) {
+            alert('Your cart is empty.');
+            return;
+        }
+
+        let cartDetails = cart.map(item => `${item.name} - $${item.price}`).join('\n');
+        alert('Your Cart:\n' + cartDetails);
     }
 
     function showCategory(category) {
@@ -309,8 +320,37 @@
         products.forEach(product => productGrid.appendChild(product)); // Re-order the products
     }
 
+    // Checkout function (uses Stripe backend integration)
+    async function checkout() {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        if (cart.length === 0) {
+            alert('Your cart is empty.');
+            return;
+        }
+
+        const items = cart.map(item => ({
+            name: item.name,
+            price: item.price * 100, // Convert price to cents for Stripe
+        }));
+
+        const response = await fetch('/api/checkout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ items }),
+        });
+
+        const session = await response.json();
+        const stripe = Stripe('your-public-stripe-key');
+        await stripe.redirectToCheckout({ sessionId: session.id });
+    }
+
     // Show all products initially
     showCategory('all');
-    updateCartCount(); // Initialize the cart count
+    updateCartCount();
 </script>
-</body
+</body>
+</html>
+
