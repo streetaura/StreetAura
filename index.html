@@ -85,6 +85,17 @@
             background: #ddd;
         }
 
+        .contact-us {
+            margin-top: 3rem;
+            padding: 2rem;
+            background-color: #111;
+            text-align: center;
+        }
+
+        .contact-us h2 {
+            margin-bottom: 1rem;
+        }
+
         @media (max-width: 768px) {
             .navbar {
                 flex-direction: column;
@@ -108,6 +119,7 @@
         <a href="#shop">Shop</a>
         <a href="#categories">Categories</a>
         <a href="#about">About</a>
+        <a href="#contact-us">Contact Us</a>
     </div>
     <div class="cart">
         <a href="#" onclick="viewCart()">Cart (<span id="cart-count">0</span>)</a>
@@ -117,14 +129,19 @@
 <h1>Welcome to Street Aura</h1>
 <p>Discover the latest urban streetwear collections.</p>
 
-<div class="swiper">
-    <div class="swiper-wrapper">
-        <div class="swiper-slide"><img src="https://i.ibb.co/yBkqQRPZ/Untitled-design-1.png" alt="T-Shirt 1"></div>
-        <div class="swiper-slide"><img src="https://i.ibb.co/gbyysTrv/Untitled-design-2.png" alt="Limited Edition"></div>
-        <div class="swiper-slide"><img src="https://i.ibb.co/4ZbJzcdr/Untitled-design-3.png" alt="Dino Tee"></div>
-        <div class="swiper-slide"><img src="https://i.ibb.co/9md7jrVm/Untitled-design.png" alt="Street Wear"></div>
+<!-- Improved Swiper with navigation buttons -->
+<div class="swiper-container">
+    <div class="swiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="https://i.ibb.co/yBkqQRPZ/Untitled-design-1.png" alt="T-Shirt 1"></div>
+            <div class="swiper-slide"><img src="https://i.ibb.co/gbyysTrv/Untitled-design-2.png" alt="Limited Edition"></div>
+            <div class="swiper-slide"><img src="https://i.ibb.co/4ZbJzcdr/Untitled-design-3.png" alt="Dino Tee"></div>
+            <div class="swiper-slide"><img src="https://i.ibb.co/9md7jrVm/Untitled-design.png" alt="Street Wear"></div>
+        </div>
+        <div class="swiper-pagination"></div>
     </div>
-    <div class="swiper-pagination"></div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
 </div>
 
 <section id="categories">
@@ -189,9 +206,45 @@
             <p>$39.99</p>
             <button class="btn" onclick="addToCart('Graphic Tee')">Add to Cart</button>
         </div>
+        <div class="product" data-category="tshirts">
+            <img src="https://i.ibb.co/yFvBrnBh/Untitled-design-1.png" alt="Graphic Tee 2">
+            <h3>Graphic Tee 2</h3>
+            <p>$39.99</p>
+            <button class="btn" onclick="addToCart('Graphic Tee 2')">Add to Cart</button>
+        </div>
+        <div class="product" data-category="tshirts">
+            <img src="https://i.ibb.co/ycVYfhQK/Untitled-design-2.png" alt="Graphic Tee 3">
+            <h3>Graphic Tee 3</h3>
+            <p>$39.99</p>
+            <button class="btn" onclick="addToCart('Graphic Tee 3')">Add to Cart</button>
+        </div>
+        <div class="product" data-category="tshirts">
+            <img src="https://i.ibb.co/j9X69ZCc/image.png" alt="Street Aura Design">
+            <h3>Street Aura Design</h3>
+            <p>$39.99</p>
+            <button class="btn" onclick="addToCart('Street Aura Design')">Add to Cart</button>
+        </div>
+        <div class="product" data-category="tshirts">
+            <img src="https://i.ibb.co/WvZ0X6pt/Untitled-design-3.png" alt="Street Wear Design">
+            <h3>Street Wear Design</h3>
+            <p>$39.99</p>
+            <button class="btn" onclick="addToCart('Street Wear Design')">Add to Cart</button>
+        </div>
+        <div class="product" data-category="tshirts">
+            <img src="https://i.ibb.co/xt9ZZSgb/Untitled-design.png" alt="Graphic Street Wear">
+            <h3>Graphic Street Wear</h3>
+            <p>$39.99</p>
+            <button class="btn" onclick="addToCart('Graphic Street Wear')">Add to Cart</button>
+        </div>
     </div>
     <button class="btn" onclick="sortProducts('asc')">Sort by Price: Low to High</button>
     <button class="btn" onclick="sortProducts('desc')">Sort by Price: High to Low</button>
+</section>
+
+<!-- Contact Us Section -->
+<section id="contact-us" class="contact-us">
+    <h2>Contact Us</h2>
+    <p>Email us at: <a href="mailto:clothingservices9@gmail.com">clothingservices9@gmail.com</a></p>
 </section>
 
 <footer>
@@ -209,6 +262,10 @@
         autoplay: {
             delay: 3000,
             disableOnInteraction: false,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
         }
     });
 
@@ -256,5 +313,4 @@
     showCategory('all');
     updateCartCount(); // Initialize the cart count
 </script>
-</body>
-</html>
+</body
