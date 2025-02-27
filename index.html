@@ -418,29 +418,30 @@ visibility: visible;
 
 <!-- Cart Container -->
 <div id="cart" class="cart-container">
-<h3>Your Cart</h3>
-<div id="cart-items"></div>
-<button class="btn" id="checkoutButton" onclick="goToCheckout()">Proceed to Checkout</button>
-<button class="btn" id="exitCheckoutButton" onclick="exitCheckout()">Exit Checkout</button>
+    <h3>Your Cart</h3>
+    <div id="cart-items"></div>
+    <button class="btn" id="checkoutButton" onclick="goToCheckout()">Proceed to Checkout</button>
+    <button class="btn" id="exitCheckoutButton" onclick="exitCheckout()">Exit Checkout</button>
 </div>
 
 <!-- Checkout Page (Hidden by Default) -->
 <div id="checkoutPage" class="checkout-container" style="display: none;">
-<h2>Checkout</h2>
-<form id="checkoutForm">
-    <input type="text" id="name" name="name" placeholder="Full Name" required>
-    <input type="email" id="email" name="email" placeholder="Email Address" required>
-    <input type="text" id="address" name="address" placeholder="Shipping Address" required>
-    <input type="text" id="city" name="city" placeholder="City" required>
-    <input type="text" id="postalCode" name="postalCode" placeholder="Postal Code" required>
-    <select id="paymentMethod" name="paymentMethod" required>
-        <option value="">Select Payment Method</option>
-        <option value="credit">Credit Card</option>
-        <option value="paypal">PayPal</option>
-    </select>
-    <button type="submit" class="btn">Complete Purchase</button>
-</form>
+    <h2>Checkout</h2>
+    <form id="checkoutForm">
+        <input type="text" id="name" name="name" placeholder="Full Name" required>
+        <input type="email" id="email" name="email" placeholder="Email Address" required>
+        <input type="text" id="address" name="address" placeholder="Shipping Address" required>
+        <input type="text" id="city" name="city" placeholder="City" required>
+        <input type="text" id="postalCode" name="postalCode" placeholder="Postal Code" required>
+        <select id="paymentMethod" name="paymentMethod" required>
+            <option value="">Select Payment Method</option>
+            <option value="credit">Credit Card</option>
+            <option value="paypal">PayPal</option>
+        </select>
+        <button type="submit" class="btn">Complete Purchase</button>
+    </form>
 </div>
+
 
 <!-- Notification -->
 <div id="notification">Product added to cart!</div>
