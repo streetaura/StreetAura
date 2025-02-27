@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Street Aura</title>
+    <style>
+           #cart { display: none; }
+        #checkoutPage { display: none; }
 <link href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" rel="stylesheet">
 <style>
 /* Basic Styling */
@@ -416,31 +419,23 @@ visibility: visible;
 </div>
 
 
-<!-- Cart Container -->
-<div id="cart" class="cart-container">
-    <h3>Your Cart</h3>
-    <div id="cart-items"></div>
-    <button class="btn" id="checkoutButton" onclick="goToCheckout()">Proceed to Checkout</button>
-    <button class="btn" id="exitCheckoutButton" onclick="exitCheckout()">Exit Checkout</button>
-</div>
+    <!-- Cart Section -->
+    <div id="cart">
+        <h2>Your Cart</h2>
+        <div id="cart-items"></div>
+        <button onclick="goToCheckout()">Proceed to Checkout</button>
+    </div>
 
-<!-- Checkout Page (Hidden by Default) -->
-<div id="checkoutPage" class="checkout-container" style="display: none;">
-    <h2>Checkout</h2>
-    <form id="checkoutForm">
-        <input type="text" id="name" name="name" placeholder="Full Name" required>
-        <input type="email" id="email" name="email" placeholder="Email Address" required>
-        <input type="text" id="address" name="address" placeholder="Shipping Address" required>
-        <input type="text" id="city" name="city" placeholder="City" required>
-        <input type="text" id="postalCode" name="postalCode" placeholder="Postal Code" required>
-        <select id="paymentMethod" name="paymentMethod" required>
-            <option value="">Select Payment Method</option>
-            <option value="credit">Credit Card</option>
-            <option value="paypal">PayPal</option>
-        </select>
-        <button type="submit" class="btn">Complete Purchase</button>
-    </form>
-</div>
+    <!-- Checkout Page -->
+    <div id="checkoutPage">
+        <h2>Checkout Page</h2>
+        <form id="checkoutForm">
+            <input type="text" placeholder="Name" required>
+            <input type="email" placeholder="Email" required>
+            <button type="submit">Submit Order</button>
+        </form>
+        <button onclick="exitCheckout()">Exit Checkout</button>
+    </div>
 
 
 <!-- Notification -->
@@ -465,87 +460,83 @@ clickable: true,
 },
 });
 
-let cart = [];
+      let cart = [];
 
-function addToCart(event, productName, productPrice, productImage) {
-    event.stopPropagation();
-    cart.push({
-        name: productName,
-        price: productPrice,
-        image: productImage
-    });
-    updateCart();
-    showNotification(productName);  // Show the notification when a product is added
-}
+        function addToCart(event, productName, productPrice, productImage) {
+            event.stopPropagation();
+            cart.push({
+                name: productName,
+                price: productPrice,
+                image: productImage
+            });
+            updateCart();
+            showNotification(productName);  
+        }
 
-function updateCart() {
-    const cartItemsContainer = document.getElementById('cart-items');
-    cartItemsContainer.innerHTML = '';
-    cart.forEach(item => {
-        const itemDiv = document.createElement('div');
-        itemDiv.className = 'cart-item';
-        itemDiv.innerHTML = `
-        <img src="${item.image}" alt="${item.name}" width="50">
-        <p>${item.name}</p>
-        <p>$${item.price.toFixed(2)}</p>
-        `;
-        cartItemsContainer.appendChild(itemDiv);
-    });
-}
+        function updateCart() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            cartItemsContainer.innerHTML = '';
+            cart.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'cart-item';
+                itemDiv.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" width="50">
+                    <p>${item.name}</p>
+                    <p>$${item.price.toFixed(2)}</p>
+                `;
+                cartItemsContainer.appendChild(itemDiv);
+            });
+        }
 
-function showNotification(productName) {
-    const notification = document.getElementById('notification');
-    notification.textContent = `${productName} added to cart!`;
-    notification.classList.add('show');
+        function showNotification(productName) {
+            const notification = document.getElementById('notification');
+            notification.textContent = `${productName} added to cart!`;
+            notification.classList.add('show');
 
-    // Hide the notification after 3 seconds
-    setTimeout(() => {
-        notification.classList.remove('show');
-    }, 3000);
-}
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
 
-function openModal(imageSrc) {
-    const modal = document.getElementById('imageModal');
-    const modalImage = document.getElementById('modalImage');
-    modalImage.src = imageSrc;
-    modal.style.display = 'flex';
+        function openModal(imageSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            modalImage.src = imageSrc;
+            modal.style.display = 'flex';
 
-    // Add the expanded class for 4:5 aspect ratio
-    modalImage.classList.add('expanded');
-}
+            modalImage.classList.add('expanded');
+        }
 
-function closeModal() {
-    const modal = document.getElementById('imageModal');
-    modal.style.display = 'none';
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.style.display = 'none';
 
-    // Remove the expanded class
-    const modalImage = document.getElementById('modalImage');
-    modalImage.classList.remove('expanded');
-}
+            const modalImage = document.getElementById('modalImage');
+            modalImage.classList.remove('expanded');
+        }
 
-// Show Cart when clicking the cart button
-function toggleCart() {
-    const cartContainer = document.getElementById('cart');
-    cartContainer.style.display = cartContainer.style.display === 'block' ? 'none' : 'block';
-}
+        function toggleCart() {
+            const cartContainer = document.getElementById('cart');
+            cartContainer.style.display = cartContainer.style.display === 'block' ? 'none' : 'block';
+        }
 
-// Show Checkout page when clicking Checkout button
-function goToCheckout() {
-    document.getElementById('checkoutPage').style.display = 'block';
-    document.getElementById('cart').style.display = 'none';
-}
+        // Show Checkout page when clicking Proceed to Checkout button
+        function goToCheckout() {
+            document.getElementById('checkoutPage').style.display = 'block';
+            document.getElementById('cart').style.display = 'none';
+        }
 
-// Hide Cart and Checkout when clicking Exit Checkout button
-function exitCheckout() {
-    document.getElementById('checkoutPage').style.display = 'none';
-    document.getElementById('cart').style.display = 'block';
-}
+        // Hide Checkout page and go back to Cart
+        function exitCheckout() {
+            document.getElementById('checkoutPage').style.display = 'none';
+            document.getElementById('cart').style.display = 'block';
+        }
 
-// Handle form submission (mock checkout)
-document.getElementById('checkoutForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-    alert('Thank you for your purchase! Your order will be processed soon.');
-});
+        // Handle form submission (mock checkout)
+        document.getElementById('checkoutForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Thank you for your purchase! Your order will be processed soon.');
+        });
 </script>
 </body>
 </html>
