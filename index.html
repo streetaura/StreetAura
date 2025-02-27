@@ -116,22 +116,22 @@
         #cart.open {
             right: 0; /* Cart slides in */
         }
-        /* Close button in the cart */
-.close-cart-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 1.5rem;
-    cursor: pointer;
-}
 
-.close-cart-btn:hover {
-    color: #ddd;
-}
-        <button class="close-cart-btn" onclick="closeCart()">X</button>
+        /* Close button in the cart */
+        .close-cart-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .close-cart-btn:hover {
+            color: #ddd;
+        }
 
         .cart-item {
             display: flex;
@@ -304,84 +304,84 @@
     </div>
 </section>
 
-<section id="contact-us">
-    <div class="contact-us">
-        <h2>Contact Us</h2>
-        <p>Have any questions? Reach out to us via email or follow us on social media.</p>
+  <section id="contact-us">
+        <div class="contact-us">
+            <h2>Contact Us</h2>
+            <p>Have any questions? Reach out to us via email or follow us on social media.</p>
+        </div>
+    </section>
+
+    <!-- Cart Container -->
+    <div id="cart" class="cart-container">
+        <h3>Your Cart</h3>
+        <div id="cart-items"></div>
+        <button class="checkout-btn" id="checkout-btn" onclick="checkout()" disabled>Proceed to Checkout</button>
+        <!-- Close Button -->
+        <button class="close-cart-btn" onclick="closeCart()">X</button>
     </div>
-</section>
 
-<!-- Only one cart container now -->
-<div id="cart" class="cart-container">
-    <h3>Your Cart</h3>
-    <div id="cart-items"></div>
-    <button class="checkout-btn" id="checkout-btn" onclick="checkout()" disabled>Proceed to Checkout</button>
-    <!-- Close Button -->
-    <button class="btn" onclick="closeCart()">Close Cart</button>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-<script>
-    var swiper = new Swiper('.swiper', {
-        loop: true,
-        spaceBetween: 10,
-        slidesPerView: 1,
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-        },
-    });
-
-    let cart = [];
-
-    function addToCart(name, price, imgUrl) {
-        cart.push({ name, price, imgUrl });
-        updateCart();
-    }
-
-    function updateCart() {
-        const cartDetails = document.getElementById('cart-items');
-        cartDetails.innerHTML = '';
-        cart.forEach(item => {
-            const cartItem = document.createElement('div');
-            cartItem.classList.add('cart-item');
-            cartItem.innerHTML = `
-                <img src="${item.imgUrl}" alt="${item.name}">
-                <p>${item.name} - $${item.price}</p>
-                <span class="remove" onclick="removeFromCart('${item.name}')">X</span>
-            `;
-            cartDetails.appendChild(cartItem);
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script>
+        var swiper = new Swiper('.swiper', {
+            loop: true,
+            spaceBetween: 10,
+            slidesPerView: 1,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
         });
 
-        document.getElementById('cart-count').innerText = cart.length;
-        document.getElementById('checkout-btn').disabled = cart.length === 0;
-    }
+        let cart = [];
 
-    function removeFromCart(name) {
-        cart = cart.filter(item => item.name !== name);
-        updateCart();
-    }
+        function addToCart(name, price, imgUrl) {
+            cart.push({ name, price, imgUrl });
+            updateCart();
+        }
 
-    function viewCart() {
-        const cartSection = document.getElementById('cart');
-        cartSection.classList.add('open');
-    }
+        function updateCart() {
+            const cartDetails = document.getElementById('cart-items');
+            cartDetails.innerHTML = '';
+            cart.forEach(item => {
+                const cartItem = document.createElement('div');
+                cartItem.classList.add('cart-item');
+                cartItem.innerHTML = `
+                    <img src="${item.imgUrl}" alt="${item.name}">
+                    <p>${item.name} - $${item.price}</p>
+                    <span class="remove" onclick="removeFromCart('${item.name}')">X</span>
+                `;
+                cartDetails.appendChild(cartItem);
+            });
 
-    function closeCart() {
-        const cartSection = document.getElementById('cart');
-        cartSection.classList.remove('open');
-        swiper.enable();
-    }
+            document.getElementById('cart-count').innerText = cart.length;
+            document.getElementById('checkout-btn').disabled = cart.length === 0;
+        }
 
-    function checkout() {
-        alert('Proceeding to checkout!');
-        window.location.href = '/checkout'; 
-    }
-</script>
+        function removeFromCart(name) {
+            cart = cart.filter(item => item.name !== name);
+            updateCart();
+        }
+
+        function viewCart() {
+            const cartSection = document.getElementById('cart');
+            cartSection.classList.add('open');
+        }
+
+        function closeCart() {
+            const cartSection = document.getElementById('cart');
+            cartSection.classList.remove('open');
+            swiper.enable();
+        }
+
+        function checkout() {
+            alert('Proceeding to checkout!');
+            window.location.href = '/checkout'; 
+        }
+    </script>
 
 </body>
 </html>
