@@ -85,26 +85,6 @@
             background: #ddd;
         }
 
-        #cart-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            color: #fff;
-            padding: 2rem;
-        }
-
-        #cart-modal .cart-content {
-            background: #222;
-            padding: 2rem;
-            border-radius: 10px;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
         @media (max-width: 768px) {
             .navbar {
                 flex-direction: column;
@@ -139,9 +119,9 @@
 
 <div class="swiper">
     <div class="swiper-wrapper">
-        <div class="swiper-slide"><img src="https://i.ibb.co/Y4zZZ15k/Flying-is-my-cardio.png" alt="T-Shirt 1"></div>
-        <div class="swiper-slide"><img src="https://i.ibb.co/s9DJKqkS/lim-edition.png" alt="Limited Edition"></div>
-        <div class="swiper-slide"><img src="https://i.ibb.co/rR4tHKMy/dino-tees.png" alt="Dino Tee"></div>
+        <div class="swiper-slide"><img src="https://i.ibb.co/yBkqQRPZ/Untitled-design-1.png" alt="T-Shirt 1"></div>
+        <div class="swiper-slide"><img src="https://i.ibb.co/gbyysTrv/Untitled-design-2.png" alt="Limited Edition"></div>
+        <div class="swiper-slide"><img src="https://i.ibb.co/4ZbJzcdr/Untitled-design-3.png" alt="Dino Tee"></div>
     </div>
     <div class="swiper-pagination"></div>
 </div>
@@ -156,38 +136,64 @@
 <section id="shop">
     <h2>Shop Our Collection</h2>
     <div class="product-grid" id="productGrid">
+        <!-- Product 1 -->
         <div class="product" data-category="tshirts">
-            <img src="https://i.ibb.co/Y4zZZ15k/Flying-is-my-cardio.png" alt="Flying is My Cardio">
+            <img src="https://i.ibb.co/yBkqQRPZ/Untitled-design-1.png" alt="Flying is My Cardio">
             <h3>Flying is My Cardio</h3>
-            <p>$29.99</p>
-            <button class="btn" onclick="addToCart('Flying is My Cardio', 29.99)">Add to Cart</button>
+            <p>$34.99</p>
+            <button class="btn" onclick="addToCart('Flying is My Cardio')">Add to Cart</button>
         </div>
+        
+        <!-- Product 2 -->
         <div class="product" data-category="tshirts">
-            <img src="https://i.ibb.co/s9DJKqkS/lim-edition.png" alt="Limited Edition">
-            <h3>Limited Edition</h3>
-            <p>$39.99</p>
-            <button class="btn" onclick="addToCart('Limited Edition', 39.99)">Add to Cart</button>
+            <img src="https://i.ibb.co/gbyysTrv/Untitled-design-2.png" alt="Limited Edition">
+            <h3>retroism</h3>
+            <p>$34.99</p>
+            <button class="btn" onclick="addToCart('Limited Edition')">Add to Cart</button>
         </div>
-        <!-- Add more products as needed -->
-    </div>
-</section>
+        
+        <!-- Product 3 -->
+        <div class="product" data-category="tshirts">
+            <img src="https://i.ibb.co/4ZbJzcdr/Untitled-design-3.png" alt="Dino Tee">
+            <h3>Dino Tee</h3>
+            <p>$34.99</p>
+            <button class="btn" onclick="addToCart('Dino Tee')">Add to Cart</button>
+        </div>
+        
+        <!-- Product 4 -->
+        <div class="product" data-category="hoodies">
+            <img src="https://i.ibb.co/yFvBrnBh/Untitled-design-1.png" alt="Urban Hoodie">
+            <h3>Urban Hoodie</h3>
+            <p>$34.99</p>
+            <button class="btn" onclick="addToCart('Urban Hoodie')">Add to Cart</button>
+        </div>
 
-<!-- Cart Modal -->
-<div id="cart-modal">
-    <div class="cart-content">
-        <h2>Your Cart</h2>
-        <ul id="cart-items"></ul>
-        <button class="btn" onclick="checkout()">Proceed to Checkout</button>
-        <button class="btn" onclick="closeCart()">Close</button>
+        <!-- Product 5 -->
+        <div class="product" data-category="hoodies">
+            <img src="https://i.ibb.co/ycVYfhQK/Untitled-design-2.png" alt="Street Style Hoodie">
+            <h3>Street Style Hoodie</h3>
+            <p>$34.99</p>
+            <button class="btn" onclick="addToCart('Street Style Hoodie')">Add to Cart</button>
+        </div>
+        
+        <!-- Product 6 -->
+        <div class="product" data-category="tshirts">
+            <img src="https://i.ibb.co/xtjRSF0V/Untitled-design-4.png" alt="Graphic Tee">
+            <h3>Graphic Tee</h3>
+            <p>$34.99</p>
+            <button class="btn" onclick="addToCart('Graphic Tee')">Add to Cart</button>
+        </div>
+
     </div>
-</div>
+    <button class="btn" onclick="sortProducts('asc')">Sort by Price: Low to High</button>
+    <button class="btn" onclick="sortProducts('desc')">Sort by Price: High to Low</button>
+</section>
 
 <footer>
     <p>&copy; 2025 Street Aura. All Rights Reserved.</p>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-<script src="https://js.stripe.com/v3/"></script>
 <script>
     const swiper = new Swiper('.swiper', {
         loop: true,
@@ -203,10 +209,11 @@
 
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-    function addToCart(product, price) {
-        cart.push({ product, price });
+    function addToCart(product) {
+        cart.push(product);
         localStorage.setItem("cart", JSON.stringify(cart));
         updateCartCount();
+        alert(`${product} added to cart!`);
     }
 
     function updateCartCount() {
@@ -215,28 +222,29 @@
     }
 
     function viewCart() {
-        const cartModal = document.getElementById('cart-modal');
-        const cartItems = document.getElementById('cart-items');
-        cartItems.innerHTML = ''; // Clear existing cart items
+        alert('Viewing Cart: ' + cart.join(', '));
+    }
 
-        cart.forEach(item => {
-            const li = document.createElement('li');
-            li.textContent = `${item.product} - $${item.price}`;
-            cartItems.appendChild(li);
+    function showCategory(category) {
+        const products = document.querySelectorAll('.product');
+        products.forEach(product => {
+            if (category === 'all' || product.dataset.category === category) {
+                product.style.display = 'block';
+            } else {
+                product.style.display = 'none';
+            }
         });
-
-        cartModal.style.display = 'block';
     }
 
-    function closeCart() {
-        document.getElementById('cart-modal').style.display = 'none';
-    }
-
-    function checkout() {
-        // Front-end logic to call the back-end Stripe payment session
-        // This is where you should connect to your back-end (Node.js/Express)
-        // and create a Stripe payment session.
-        alert("Proceeding to checkout. This requires back-end integration.");
+    function sortProducts(order) {
+        const productGrid = document.getElementById('productGrid');
+        const products = Array.from(productGrid.children);
+        products.sort((a, b) => {
+            const priceA = parseFloat(a.querySelector('p').textContent.slice(1));
+            const priceB = parseFloat(b.querySelector('p').textContent.slice(1));
+            return order === 'asc' ? priceA - priceB : priceB - priceA;
+        });
+        products.forEach(product => productGrid.appendChild(product)); // Re-order the products
     }
 
     // Show all products initially
