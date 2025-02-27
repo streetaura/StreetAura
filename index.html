@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +6,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Street Aura</title>
-    <link href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" rel="stylesheet">
     <style>
         /* Basic Styling */
         body {
@@ -140,19 +140,6 @@
         #cart .btn:hover {
             background-color: #d32f2f;
         }
-
-        .close-cart-btn {
-            background-color: #f44336;
-            color: white;
-            border: none;
-            padding: 10px;
-            font-size: 1.2em;
-            cursor: pointer;
-        }
-
-        .close-cart-btn:hover {
-            background-color: #d32f2f;
-        }
     </style>
 </head>
 
@@ -173,40 +160,174 @@
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>
     </div>
+    
+<section id="shop">
+    <h2>Shop Our Collection</h2>
+    <div class="product-grid" id="productGrid">
+        <!-- Product 1 -->
+        <div class="product" data-category="tshirts" onclick="openModal('https://i.ibb.co/yFvBrnBh/Untitled-design-1.png')">
+            <img src="https://i.ibb.co/yFvBrnBh/Untitled-design-1.png" alt="Fearless master">
+            <h3>Fearless master</h3>
+            <p>$39.99</p>
+            <button class="btn" onclick="addToCart('Fearless master', 39.99, 'https://i.ibb.co/yFvBrnBh/Untitled-design-1.png')">Add to Cart</button>
+        </div>
+        <!-- Product 2 -->
+        <div class="product" data-category="tshirts" onclick="openModal('https://i.ibb.co/xt3fCm7w/Untitled-design-2.png')">
+            <img src="https://i.ibb.co/xt3fCm7w/Untitled-design-2.png" alt="van goo">
+            <h3>van goo</h3>
+            <p>$39.99</p>
+            <button class="btn" onclick="addToCart('van goo', 39.99, 'https://i.ibb.co/xt3fCm7w/Untitled-design-2.png')">Add to Cart</button>
+        </div>
+        <!-- Product 3 -->
+        <div class="product" data-category="tshirts" onclick="openModal('https://i.ibb.co/Q3N1FDRs/Untitled-design-4.png')">
+            <img src="https://i.ibb.co/Q3N1FDRs/Untitled-design-4.png" alt="How to poo">
+            <h3>How to poo</h3>
+            <p>$39.99</p>
+            <button class="btn" onclick="addToCart('How to poo', 39.99, 'https://i.ibb.co/Q3N1FDRs/Untitled-design-4.png')">Add to Cart</button>
+        </div>
+        <!-- Product 4 -->
+        <div class="product" data-category="tshirts" onclick="openModal('https://i.ibb.co/cKngKXWG/image.png')">
+            <img src="https://i.ibb.co/cKngKXWG/image.png" alt="Tsunami">
+            <h3>Tsunami</h3>
+            <p>$39.99</p>
+            <button class="btn" onclick="addToCart('Tsunami', 39.99, 'https://i.ibb.co/cKngKXWG/image.png')">Add to Cart</button>
+        </div>
+        <!-- Product 5 -->
+        <div class="product" data-category="tshirts" onclick="openModal('https://i.ibb.co/YBmXS3TZ/Untitled-design-3.png')">
+            <img src="https://i.ibb.co/YBmXS3TZ/Untitled-design-3.png" alt="Master of swing">
+            <h3>Master of swing</h3>
+            <p>$39.99</p>
+            <button class="btn" onclick="addToCart('Master of swing', 39.99, 'https://i.ibb.co/YBmXS3TZ/Untitled-design-3.png')">Add to Cart</button>
+        </div>
+        <!-- Product 6 -->
+        <div class="product" data-category="tshirts" onclick="openModal('https://i.ibb.co/MxwddD1H/Untitled-design.png')">
+            <img src="https://i.ibb.co/MxwddD1H/Untitled-design.png" alt="Back pub">
+            <h3>Back pub</h3>
+            <p>$39.99</p>
+            <button class="btn" onclick="addToCart('Back pub', 39.99, 'https://i.ibb.co/MxwddD1H/Untitled-design.png')">Add to Cart</button>
+        </div>
+        <!-- Product 7 -->
+        <div class="product" data-category="tshirts" onclick="openModal('https://i.ibb.co/Y4zZZ15k/Flying-is-my-cardio.png')">
+            <img src="https://i.ibb.co/Y4zZZ15k/Flying-is-my-cardio.png" alt="Flying is my cardio">
+            <h3>Flying is my cardio</h3>
+            <p>$39.99</p>
+            <button class="btn" onclick="addToCart('Flying is my cardio', 39.99, 'https://i.ibb.co/Y4zZZ15k/Flying-is-my-cardio.png')">Add to Cart</button>
+        </div>
+        <!-- Product 8 -->
+        <div class="product" data-category="tshirts" onclick="openModal('https://i.ibb.co/x8g67sLB/Untitled-design-1.png')">
+            <img src="https://i.ibb.co/x8g67sLB/Untitled-design-1.png" alt="Culture">
+            <h3>Culture</h3>
+            <p>$39.99</p>
+            <button class="btn" onclick="addToCart('Culture', 39.99, 'https://i.ibb.co/x8g67sLB/Untitled-design-1.png')">Add to Cart</button>
+        </div>
+        <!-- Product 9 -->
+        <div class="product" data-category="tshirts" onclick="openModal('https://i.ibb.co/HL77mzKN/Untitled-design-2.png')">
+            <img src="https://i.ibb.co/HL77mzKN/Untitled-design-2.png" alt="king kong">
+            <h3>king kong</h3>
+            <p>$39.99</p>
+            <button class="btn" onclick="addToCart('king kong', 39.99, 'https://i.ibb.co/HL77mzKN/Untitled-design-2.png')">Add to Cart</button>
+        </div>
+        <!-- Product 10 -->
+        <div class="product" data-category="tshirts" onclick="openModal('https://i.ibb.co/MDz9rb60/Untitled-design-3.png')">
+            <img src="https://i.ibb.co/MDz9rb60/Untitled-design-3.png" alt="Helpless">
+            <h3>Helpless</h3>
+            <p>$39.99</p>
+            <button class="btn" onclick="addToCart('Helpless', 39.99, 'https://i.ibb.co/MDz9rb60/Untitled-design-3.png')">Add to Cart</button>
+        </div>
+        <!-- Product 11 -->
+        <div class="product" data-category="tshirts" onclick="openModal('https://i.ibb.co/Q7x4GKC7/Untitled-design.png')">
+            <img src="https://i.ibb.co/Q7x4GKC7/Untitled-design.png" alt="Graphic Tee">
+            <h3>Graphic Tee</h3>
+            <p>$39.99</p>
+            <button class="btn" onclick="addToCart('Graphic Tee', 39.99, 'https://i.ibb.co/Q7x4GKC7/Untitled-design.png')">Add to Cart</button>
+        </div>
+        <!-- Product 12 -->
+        <div class="product" data-category="tshirts" onclick="openModal('https://i.ibb.co/8gR4r9T3/lim-edition.png')">
+            <img src="https://i.ibb.co/8gR4r9T3/lim-edition.png" alt="Limited Edition">
+            <h3>Limited Edition</h3>
+            <p>$39.99</p>
+            <button class="btn" onclick="addToCart('Limited Edition', 39.99, 'https://i.ibb.co/8gR4r9T3/lim-edition.png')">Add to Cart</button>
+        </div>
+        <!-- Product 13 -->
+        <div class="product" data-category="tshirts" onclick="openModal('https://i.ibb.co/nNz0jqfk/dino-tees.png')">
+            <img src="https://i.ibb.co/nNz0jqfk/dino-tees.png" alt="Dino Tees">
+            <h3>Dino Tees</h3>
+            <p>$39.99</p>
+            <button class="btn" onclick="addToCart('Dino Tees', 39.99, 'https://i.ibb.co/nNz0jqfk/dino-tees.png')">Add to Cart</button>
+        </div>
+    </div>
+</section>
 
-    <section id="shop">
-        <h2>Shop Our Collection</h2>
-        <div class="product-grid" id="productGrid">
-            <!-- Product 1 -->
-            <div class="product" data-category="tshirts" onclick="openModal('https://i.ibb.co/yFvBrnBh/Untitled-design-1.png')">
-                <img src="https://i.ibb.co/yFvBrnBh/Untitled-design-1.png" alt="Fearless master">
-                <h3>Fearless master</h3>
-                <p>$39.99</p>
-                <button class="btn" onclick="addToCart('Fearless master', 39.99, 'https://i.ibb.co/yFvBrnBh/Untitled-design-1.png')">Add to Cart</button>
-            </div>
-            <!-- More products here... -->
+    <!-- Modal for Enlarged Image -->
+<div id="imageModal" class="modal" style="display:none;">
+    <img id="modalImage" src="" alt="Product Image">
+    <button id="modalClose" onclick="closeModal()">X</button>
+</div>
+
+<script>
+    function openModal(imageUrl) {
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        modal.style.display = 'flex';
+        modalImage.src = imageUrl;
+    }
+
+    function closeModal() {
+        const modal = document.getElementById('imageModal');
+        modal.style.display = 'none';
+    }
+</script>
+
+<style>
+    /* Modal and Lightbox Styling */
+    #imageModal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        justify-content: center;
+        align-items: center;
+        z-index: 1001;
+    }
+
+    #imageModal img {
+        max-width: 80%;
+        max-height: 80%;
+    }
+
+    #modalClose {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: red;
+        color: white;
+        border: none;
+        font-size: 1.5em;
+        cursor: pointer;
+    }
+</style>
+
+  <section id="contact-us">
+        <div class="contact-us">
+            <h2>Contact Us</h2>
+            <p>Have any questions? Reach out to us via email or follow us on social media.</p>
         </div>
     </section>
 
-    <!-- Modal for Enlarged Image -->
-    <div id="imageModal" class="modal" style="display:none;">
-        <img id="modalImage" src="" alt="Product Image">
-        <button id="modalClose" onclick="closeModal()">X</button>
+    <!-- Cart Container -->
+    <div id="cart" class="cart-container">
+        <h3>Your Cart</h3>
+        <div id="cart-items"></div>
+        <button class="checkout-btn" id="checkout-btn" onclick="checkout()" disabled>Proceed to Checkout</button>
+        <!-- Close Button -->
+        <button class="close-cart-btn" onclick="closeCart()">X</button>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script>
-        function openModal(imageUrl) {
-            const modal = document.getElementById('imageModal');
-            const modalImage = document.getElementById('modalImage');
-            modal.style.display = 'flex';
-            modalImage.src = imageUrl;
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('imageModal');
-            modal.style.display = 'none';
-        }
-
         var swiper = new Swiper('.swiper', {
             loop: true,
             spaceBetween: 10,
@@ -226,7 +347,6 @@
         function addToCart(name, price, imgUrl) {
             cart.push({ name, price, imgUrl });
             updateCart();
-            viewCart();
         }
 
         function updateCart() {
@@ -243,6 +363,7 @@
                 cartDetails.appendChild(cartItem);
             });
 
+            document.getElementById('cart-count').innerText = cart.length;
             document.getElementById('checkout-btn').disabled = cart.length === 0;
         }
 
@@ -253,12 +374,13 @@
 
         function viewCart() {
             const cartSection = document.getElementById('cart');
-            cartSection.style.display = 'block';
+            cartSection.classList.add('open');
         }
 
         function closeCart() {
             const cartSection = document.getElementById('cart');
-            cartSection.style.display = 'none';
+            cartSection.classList.remove('open');
+            swiper.enable();
         }
 
         function checkout() {
@@ -267,13 +389,5 @@
         }
     </script>
 
-    <!-- Cart Container -->
-    <div id="cart" class="cart-container">
-        <h3>Your Cart</h3>
-        <div id="cart-items"></div>
-        <button class="checkout-btn" id="checkout-btn" onclick="checkout()" disabled>Proceed to Checkout</button>
-        <button class="close-cart-btn" onclick="closeCart()">X</button>
-    </div>
 </body>
-
 </html>
