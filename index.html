@@ -33,6 +33,10 @@
             color: #fff;
         }
 
+        .cart {
+            color: #fff;
+        }
+
         .swiper {
             width: 100%;
             height: 300px;
@@ -80,6 +84,19 @@
         .btn:hover {
             background: #ddd;
         }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+            }
+            .product-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+            .swiper {
+                height: 200px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -91,6 +108,9 @@
         <a href="#shop">Shop</a>
         <a href="#categories">Categories</a>
         <a href="#about">About</a>
+    </div>
+    <div class="cart">
+        <a href="#" onclick="viewCart()">Cart (<span id="cart-count">0</span>)</a>
     </div>
 </nav>
 
@@ -110,6 +130,7 @@
     <h2>Categories</h2>
     <button class="btn" onclick="showCategory('tshirts')">T-Shirts</button>
     <button class="btn" onclick="showCategory('hoodies')">Hoodies</button>
+    <button class="btn" onclick="showCategory('all')">All</button>
 </section>
 
 <section id="shop">
@@ -127,7 +148,10 @@
             <p>$39.99</p>
             <button class="btn" onclick="addToCart('Limited Edition')">Add to Cart</button>
         </div>
+        <!-- Add more products as needed -->
     </div>
+    <button class="btn" onclick="sortProducts('asc')">Sort by Price: Low to High</button>
+    <button class="btn" onclick="sortProducts('desc')">Sort by Price: High to Low</button>
 </section>
 
 <footer>
@@ -148,20 +172,50 @@
         }
     });
 
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
     function addToCart(product) {
-        alert(product + ' added to cart!');
+        cart.push(product);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCartCount();
+        alert(`${product} added to cart!`);
+    }
+
+    function updateCartCount() {
+        const cartCount = document.getElementById('cart-count');
+        cartCount.textContent = cart.length;
+    }
+
+    function viewCart() {
+        alert('Viewing Cart: ' + cart.join(', '));
     }
 
     function showCategory(category) {
         const products = document.querySelectorAll('.product');
         products.forEach(product => {
-            if (product.dataset.category === category || category === 'all') {
+            if (category === 'all' || product.dataset.category === category) {
                 product.style.display = 'block';
             } else {
                 product.style.display = 'none';
             }
         });
     }
+
+    function sortProducts(order) {
+        const productGrid = document.getElementById('productGrid');
+        const products = Array.from(productGrid.children);
+        products.sort((a, b) => {
+            const priceA = parseFloat(a.querySelector('p').textContent.slice(1));
+            const priceB = parseFloat(b.querySelector('p').textContent.slice(1));
+            return order === 'asc' ? priceA - priceB : priceB - priceA;
+        });
+        products.forEach(product => productGrid.appendChild(product)); // Re-order the products
+    }
+
+    // Show all products initially
+    showCategory('all');
+    updateCartCount(); // Initialize the cart count
 </script>
 </body>
 </html>
+
