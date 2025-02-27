@@ -35,6 +35,7 @@
 
         .cart {
             color: #fff;
+            cursor: pointer;
         }
 
         .swiper {
@@ -96,15 +97,22 @@
             margin-bottom: 1rem;
         }
 
+        /* Cart Slide-In Effect */
         #cart-details {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            display: none;
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 300px;
+            height: 100%;
             background-color: #222;
             padding: 1rem;
-            border-radius: 5px;
-            max-width: 500px;
-            margin: auto;
+            transition: left 0.3s ease-in-out;
+            overflow-y: auto;
+        }
+
+        #cart-details.active {
+            left: 0;
         }
 
         .cart-item {
@@ -134,6 +142,21 @@
             font-weight: bold;
         }
 
+        .checkout-btn {
+            margin-top: 2rem;
+            padding: 1rem;
+            background-color: #00b300;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 1.2rem;
+        }
+
+        .checkout-btn:disabled {
+            background-color: #666;
+        }
+
         @media (max-width: 768px) {
             .navbar {
                 flex-direction: column;
@@ -159,9 +182,7 @@
         <a href="#about">About</a>
         <a href="#contact-us">Contact Us</a>
     </div>
-    <div class="cart">
-        <a href="#" onclick="viewCart()">Cart (<span id="cart-count">0</span>)</a>
-    </div>
+    <div class="cart" onclick="viewCart()">Cart (<span id="cart-count">0</span>)</div>
 </nav>
 
 <h1>Welcome to Street Aura</h1>
@@ -286,6 +307,13 @@
     </div>
 </section>
 
+<!-- Cart Slide-In Section -->
+<div id="cart-details">
+    <h3>Your Cart</h3>
+    <div id="cart-items"></div>
+    <button class="checkout-btn" id="checkout-btn" onclick="checkout()" disabled>Proceed to Checkout</button>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 <script>
     var swiper = new Swiper('.swiper', {
@@ -307,11 +335,13 @@
     function addToCart(name, price, image) {
         cart.push({ name, price, image });
         document.getElementById('cart-count').textContent = cart.length;
+        updateCartView();
     }
 
-    function viewCart() {
-        const cartDetails = document.createElement('div');
-        cartDetails.id = 'cart-details';
+    function updateCartView() {
+        const cartItemsDiv = document.getElementById('cart-items');
+        cartItemsDiv.innerHTML = ''; // Clear existing items
+
         cart.forEach(item => {
             const cartItem = document.createElement('div');
             cartItem.className = 'cart-item';
@@ -321,15 +351,27 @@
                 <p>$${item.price}</p>
                 <span class="remove" onclick="removeFromCart('${item.name}')">Remove</span>
             `;
-            cartDetails.appendChild(cartItem);
+            cartItemsDiv.appendChild(cartItem);
         });
-        document.body.appendChild(cartDetails);
+
+        // Enable checkout if there are items in the cart
+        document.getElementById('checkout-btn').disabled = cart.length === 0;
     }
 
     function removeFromCart(name) {
         cart = cart.filter(item => item.name !== name);
         document.getElementById('cart-count').textContent = cart.length;
-        viewCart();
+        updateCartView();
+    }
+
+    function viewCart() {
+        const cartDetails = document.getElementById('cart-details');
+        cartDetails.classList.add('active');
+    }
+
+    function checkout() {
+        // Placeholder checkout function, can be expanded later
+        alert("Proceeding to checkout...");
     }
 </script>
 
