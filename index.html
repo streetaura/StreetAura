@@ -113,6 +113,7 @@
 
         #cart-details.active {
             left: 0;
+            display: block;
         }
 
         .cart-item {
@@ -366,7 +367,7 @@
 
     function viewCart() {
         const cartDetails = document.getElementById('cart-details');
-        cartDetails.classList.add('active');
+        cartDetails.classList.add('active'); // Trigger the slide-in effect
     }
 
     function checkout() {
