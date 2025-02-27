@@ -176,6 +176,7 @@
         <div class="swiper-button-prev"></div>
     </div>
 
+
 <section id="shop">
     <h2>Shop Our Collection</h2>
     <div class="product-grid" id="productGrid">
@@ -303,45 +304,55 @@
         },
     });
     
-let cart = []; // Keep track of cart items
+<script>
+    let cart = []; // Initialize empty cart
 
-function addToCart(name, price, image) {
-    const item = { name, price, image };
-    cart.push(item);
-    updateCartCount();
-    alert(`${name} added to cart!`);
-}
+    // Function to add item to the cart
+    function addToCart(name, price, imgUrl) {
+        cart.push({ name, price, imgUrl });
+        updateCart(); // Update cart view
+    }
 
-function updateCartCount() {
-    document.getElementById('cart-count').innerText = cart.length;
-}
+    // Function to update the cart details in the sidebar
+    function updateCart() {
+        const cartDetails = document.getElementById('cart-details');
+        cartDetails.innerHTML = ''; // Clear existing cart items
 
-function viewCart() {
-    const cartDetails = document.getElementById('cart-details');
-    const cartElement = document.getElementById('cart');
-    
-    cartDetails.innerHTML = ''; // Clear current cart contents
-    
-    cart.forEach(item => {
-        const cartItem = document.createElement('div');
-        cartItem.classList.add('cart-item');
-        
-        const img = document.createElement('img');
-        img.src = item.image;
-        cartItem.appendChild(img);
-        
-        const name = document.createElement('p');
-        name.innerText = item.name;
-        cartItem.appendChild(name);
-        
-        const removeBtn = document.createElement('span');
-        removeBtn.classList.add('remove');
-        removeBtn.innerText = 'Remove';
-        removeBtn.onclick = () => removeFromCart(item.name);
-        cartItem.appendChild(removeBtn);
-        
-        cartDetails.appendChild(cartItem);
-    });
+        cart.forEach(item => {
+            const cartItem = document.createElement('div');
+            cartItem.classList.add('cart-item');
+            cartItem.innerHTML = `
+                <img src="${item.imgUrl}" alt="${item.name}">
+                <p>${item.name} - $${item.price}</p>
+                <span class="remove" onclick="removeFromCart('${item.name}')">X</span>
+            `;
+            cartDetails.appendChild(cartItem);
+        });
+
+        // Update the cart item count
+        document.getElementById('cart-count').innerText = cart.length;
+    }
+
+    // Function to remove an item from the cart
+    function removeFromCart(name) {
+        cart = cart.filter(item => item.name !== name);
+        updateCart(); // Update cart after removal
+    }
+
+    // Function to open the cart sidebar
+    function viewCart() {
+        const cartSection = document.getElementById('cart');
+        if (!cartSection.classList.contains('open')) {
+            cartSection.classList.add('open');
+        }
+    }
+
+    // Checkout function (placeholder)
+    function checkout() {
+        alert('Proceeding to checkout...');
+    }
+</script>
+
 
     // Slide in the cart
     cartElement.classList.add('open');
