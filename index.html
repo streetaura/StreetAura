@@ -96,6 +96,21 @@
             margin-bottom: 1rem;
         }
 
+        #checkout-btn {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: #ff6347;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+
+        #checkout-btn:hover {
+            background: #ff4500;
+        }
+
         @media (max-width: 768px) {
             .navbar {
                 flex-direction: column;
@@ -129,7 +144,7 @@
 <h1>Welcome to Street Aura</h1>
 <p>Discover the latest urban streetwear collections.</p>
 
-<!-- Improved Swiper with navigation buttons -->
+<!-- Swiper for showcasing collections -->
 <div class="swiper-container">
     <div class="swiper">
         <div class="swiper-wrapper">
@@ -207,7 +222,7 @@
     <button class="btn" onclick="sortProducts('desc')">Sort by Price: High to Low</button>
 
     <!-- Checkout Button -->
-    <button class="btn" onclick="checkout()">Proceed to Checkout</button>
+    <button id="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
 </section>
 
 <!-- Contact Us Section -->
