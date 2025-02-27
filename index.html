@@ -176,7 +176,6 @@
         <div class="swiper-button-prev"></div>
     </div>
 
-
 <section id="shop">
     <h2>Shop Our Collection</h2>
     <div class="product-grid" id="productGrid">
@@ -281,11 +280,12 @@
     </div>
 </section>
 
-<!-- Cart Slide-In Section -->
-<div id="cart-details">
-    <h3>Your Cart</h3>
-    <div id="cart-items"></div>
-    <button class="checkout-btn" id="checkout-btn" onclick="checkout()" disabled>Proceed to Checkout</button>
+<div id="cart" class="cart-container">
+    <div id="cart-details">
+        <h3>Your Cart</h3>
+        <div id="cart-items"></div>
+        <button class="checkout-btn" id="checkout-btn" onclick="checkout()" disabled>Proceed to Checkout</button>
+    </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
@@ -303,8 +303,7 @@
             clickable: true,
         },
     });
-    
-<script>
+
     let cart = []; // Initialize empty cart
 
     // Function to add item to the cart
@@ -315,7 +314,7 @@
 
     // Function to update the cart details in the sidebar
     function updateCart() {
-        const cartDetails = document.getElementById('cart-details');
+        const cartDetails = document.getElementById('cart-items');
         cartDetails.innerHTML = ''; // Clear existing cart items
 
         cart.forEach(item => {
@@ -342,9 +341,7 @@
     // Function to open the cart sidebar
     function viewCart() {
         const cartSection = document.getElementById('cart');
-        if (!cartSection.classList.contains('open')) {
-            cartSection.classList.add('open');
-        }
+        cartSection.classList.toggle('open'); // Toggle cart visibility
     }
 
     // Checkout function (placeholder)
@@ -353,58 +350,5 @@
     }
 </script>
 
-
-    // Slide in the cart
-    cartElement.classList.add('open');
-
-    // Disable swiper while cart is open
-    swiper.disable();
-}
-
-function removeFromCart(name) {
-    const confirmRemove = confirm("Are you sure you want to remove this item from the cart?");
-    if (confirmRemove) {
-        // Filter out the item by its name
-        cart = cart.filter(item => item.name !== name);
-        updateCartCount();
-        updateCartView();
-    }
-}
-
-function updateCartView() {
-    const cartDetails = document.getElementById('cart-details');
-    cartDetails.innerHTML = ''; // Clear current cart contents
-    
-    cart.forEach(item => {
-        const cartItem = document.createElement('div');
-        cartItem.classList.add('cart-item');
-        
-        const img = document.createElement('img');
-        img.src = item.image;
-        cartItem.appendChild(img);
-        
-        const name = document.createElement('p');
-        name.innerText = item.name;
-        cartItem.appendChild(name);
-        
-        const removeBtn = document.createElement('span');
-        removeBtn.classList.add('remove');
-        removeBtn.innerText = 'Remove';
-        removeBtn.onclick = () => removeFromCart(item.name);
-        cartItem.appendChild(removeBtn);
-        
-        cartDetails.appendChild(cartItem);
-    });
-}
-
-function checkout() {
-    alert('Proceeding to checkout!');
-}
-
-function closeCart() {
-    const cartElement = document.getElementById('cart');
-    cartElement.classList.remove('open');
-    swiper.enable(); // Re-enable swiper when cart is closed
-}
-
-
+</body>
+</html>
