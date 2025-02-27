@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,7 +51,10 @@ cursor: pointer;
 
 .product img {
 width: 100%;
+height: auto;
+object-fit: cover;
 border-radius: 10px;
+transition: transform 0.3s ease;
 }
 
 .product h3 {
@@ -96,9 +98,19 @@ z-index: 1001;
 }
 
 #imageModal img {
+width: auto;
+height: auto;
 max-width: 80%;
 max-height: 80%;
+object-fit: contain; /* Keeps aspect ratio intact */
 border-radius: 10px;
+}
+
+/* This will enforce the 4:5 aspect ratio when the modal is active */
+#imageModal img.expanded {
+width: 80%;
+height: auto;
+aspect-ratio: 4 / 5;
 }
 
 #modalClose {
@@ -184,7 +196,6 @@ margin-bottom: 20px;
 }
 </style>
 </head>
-
 <body>
 <h1>Welcome to Street Aura</h1>
 <img src="https://i.ibb.co/7xP0LX9P/6152-B7-CA-A2-FC-4448-99-BD-1-D1-E4-D4-DC434.jpg" alt="Street Aura Logo" id="logo">
@@ -206,6 +217,7 @@ margin-bottom: 20px;
 
 <!-- Cart Button -->
 <div id="cartButton" onclick="toggleCart()">🛒</div>
+
 
 <section id="shop">
 <h2>Shop Our Collection</h2>
@@ -316,7 +328,7 @@ margin-bottom: 20px;
 </div>
 </section>
 
- <!-- About Us Section -->
+<!-- About Us Section -->
 <section class="about">
 <h2>About Us</h2>
 <p>Welcome to <strong>Street Aura</strong>, where street style meets bold self-expression. Born from the passion to redefine urban fashion, Street Aura is more than just a clothing brand — it's a movement that blends contemporary designs with the raw energy of the streets.</p>
@@ -395,11 +407,18 @@ const modal = document.getElementById('imageModal');
 const modalImage = document.getElementById('modalImage');
 modalImage.src = imageSrc;
 modal.style.display = 'flex';
+
+// Add the expanded class for 4:5 aspect ratio
+modalImage.classList.add('expanded');
 }
 
 function closeModal() {
 const modal = document.getElementById('imageModal');
 modal.style.display = 'none';
+
+// Remove the expanded class
+const modalImage = document.getElementById('modalImage');
+modalImage.classList.remove('expanded');
 }
 
 // Show Cart when clicking the cart button
@@ -418,5 +437,4 @@ cartContainer.style.display = 'none';
 }
 </script>
 </body>
-
 </html>
