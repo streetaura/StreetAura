@@ -379,11 +379,7 @@ let cart = [];
 
 function addToCart(event, productName, productPrice, productImage) {
 event.stopPropagation();
-cart.push({
-name: productName,
-price: productPrice,
-image: productImage
-});
+cart.push({ name: productName, price: productPrice, image: productImage });
 updateCart();
 }
 
@@ -401,6 +397,12 @@ itemDiv.innerHTML = `
 cartItemsContainer.appendChild(itemDiv);
 });
 }
+
+function toggleCart() {
+const cartContainer = document.getElementById('cart');
+cartContainer.style.display = cartContainer.style.display === 'block' ? 'none' : 'block';
+}
+
 
 function openModal(imageSrc) {
 const modal = document.getElementById('imageModal');
@@ -421,19 +423,35 @@ const modalImage = document.getElementById('modalImage');
 modalImage.classList.remove('expanded');
 }
 
-// Show Cart when clicking the cart button
-function toggleCart() {
-const cartContainer = document.getElementById('cart');
-cartContainer.style.display = cartContainer.style.display === 'block' ? 'none' : 'block';
+function openCheckout() {
+// Hide the cart and show the checkout section
+document.getElementById('cart').style.display = 'none';
+document.getElementById('checkoutSection').style.display = 'block';
+
+// Update checkout section with cart items
+const checkoutItemsContainer = document.getElementById('checkoutItems');
+checkoutItemsContainer.innerHTML = '';
+let total = 0;
+cart.forEach(item => {
+const itemDiv = document.createElement('div');
+itemDiv.innerHTML = `${item.name} - $${item.price.toFixed(2)}`;
+checkoutItemsContainer.appendChild(itemDiv);
+total += item.price;
+});
+document.getElementById('totalAmount').innerText = total.toFixed(2);
 }
 
-function proceedToCheckout() {
-alert('Proceeding to checkout');
+function completeCheckout() {
+alert('Thank you for your purchase!');
+cart = []; // Clear the cart
+updateCart();
+document.getElementById('checkoutSection').style.display = 'none';
 }
 
-function exitCheckout() {
-const cartContainer = document.getElementById('cart');
-cartContainer.style.display = 'none';
+function cancelCheckout() {
+// Close checkout and return to shopping
+document.getElementById('checkoutSection').style.display = 'none';
+document.getElementById('cart').style.display = 'block';
 }
 </script>
 </body>
