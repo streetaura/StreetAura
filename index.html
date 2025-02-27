@@ -502,6 +502,42 @@ setTimeout(() => {
 notification.classList.remove('show');
 }, 3000);
 }
+    
+function openModal(imageSrc) {
+const modal = document.getElementById('imageModal');
+const modalImage = document.getElementById('modalImage');
+modalImage.src = imageSrc;
+modal.style.display = 'flex';
+
+// Add the expanded class for 4:5 aspect ratio
+modalImage.classList.add('expanded');
+}
+
+function closeModal() {
+const modal = document.getElementById('imageModal');
+modal.style.display = 'none';
+
+// Remove the expanded class
+const modalImage = document.getElementById('modalImage');
+modalImage.classList.remove('expanded');
+}
+
+// Show Cart when clicking the cart button
+function toggleCart() {
+const cartContainer = document.getElementById('cart');
+cartContainer.style.display = cartContainer.style.display === 'block' ? 'none' : 'block';
+}
+
+// Show Checkout page when clicking Checkout button
+function proceedToCheckout() {
+alert('Proceeding to checkout');
+}
+
+// Hide Cart when clicking Exit Checkout button
+function exitCheckout() {
+const cartContainer = document.getElementById('cart');
+cartContainer.style.display = 'none';
+}
 
 function goToCheckout() {
 document.getElementById('checkoutPage').style.display = 'block';
