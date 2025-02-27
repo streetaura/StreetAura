@@ -122,6 +122,7 @@
         <div class="swiper-slide"><img src="https://i.ibb.co/yBkqQRPZ/Untitled-design-1.png" alt="T-Shirt 1"></div>
         <div class="swiper-slide"><img src="https://i.ibb.co/gbyysTrv/Untitled-design-2.png" alt="Limited Edition"></div>
         <div class="swiper-slide"><img src="https://i.ibb.co/4ZbJzcdr/Untitled-design-3.png" alt="Dino Tee"></div>
+        <div class="swiper-slide"><img src="https://i.ibb.co/9md7jrVm/Untitled-design.png" alt="Street Wear"></div>
     </div>
     <div class="swiper-pagination"></div>
 </div>
@@ -129,61 +130,65 @@
 <section id="categories">
     <h2>Categories</h2>
     <button class="btn" onclick="showCategory('tshirts')">T-Shirts</button>
-    <button class="btn" onclick="showCategory('hoodies')">Hoodies</button>
     <button class="btn" onclick="showCategory('all')">All</button>
 </section>
 
 <section id="shop">
     <h2>Shop Our Collection</h2>
     <div class="product-grid" id="productGrid">
-        <!-- Product 1 -->
+        <!-- T-Shirts -->
+        <div class="product" data-category="tshirts">
+            <img src="https://i.ibb.co/Y4zZZ15k/Flying-is-my-cardio.png" alt="Flying is My Cardio">
+            <h3>Flying is My Cardio</h3>
+            <p>$39.99</p>
+            <button class="btn" onclick="addToCart('Flying is My Cardio')">Add to Cart</button>
+        </div>
+        <div class="product" data-category="tshirts">
+            <img src="https://i.ibb.co/s9DJKqkS/lim-edition.png" alt="Limited Edition">
+            <h3>Limited Edition</h3>
+            <p>$39.99</p>
+            <button class="btn" onclick="addToCart('Limited Edition')">Add to Cart</button>
+        </div>
+        <div class="product" data-category="tshirts">
+            <img src="https://i.ibb.co/rR4tHKMy/dino-tees.png" alt="Dino Tee">
+            <h3>Dino Tee</h3>
+            <p>$39.99</p>
+            <button class="btn" onclick="addToCart('Dino Tee')">Add to Cart</button>
+        </div>
+
+        <!-- New T-Shirts -->
         <div class="product" data-category="tshirts">
             <img src="https://i.ibb.co/yBkqQRPZ/Untitled-design-1.png" alt="Flying is My Cardio">
             <h3>Flying is My Cardio</h3>
-            <p>$34.99</p>
+            <p>$39.99</p>
             <button class="btn" onclick="addToCart('Flying is My Cardio')">Add to Cart</button>
         </div>
-        
-        <!-- Product 2 -->
         <div class="product" data-category="tshirts">
             <img src="https://i.ibb.co/gbyysTrv/Untitled-design-2.png" alt="Limited Edition">
-            <h3>retroism</h3>
-            <p>$34.99</p>
+            <h3>Limited Edition</h3>
+            <p>$39.99</p>
             <button class="btn" onclick="addToCart('Limited Edition')">Add to Cart</button>
         </div>
-        
-        <!-- Product 3 -->
         <div class="product" data-category="tshirts">
             <img src="https://i.ibb.co/4ZbJzcdr/Untitled-design-3.png" alt="Dino Tee">
             <h3>Dino Tee</h3>
-            <p>$34.99</p>
+            <p>$39.99</p>
             <button class="btn" onclick="addToCart('Dino Tee')">Add to Cart</button>
         </div>
-        
-        <!-- Product 4 -->
-        <div class="product" data-category="hoodies">
-            <img src="https://i.ibb.co/yFvBrnBh/Untitled-design-1.png" alt="Urban Hoodie">
-            <h3>Urban Hoodie</h3>
-            <p>$34.99</p>
-            <button class="btn" onclick="addToCart('Urban Hoodie')">Add to Cart</button>
+        <div class="product" data-category="tshirts">
+            <img src="https://i.ibb.co/9md7jrVm/Untitled-design.png" alt="Street Wear">
+            <h3>Street Wear</h3>
+            <p>$39.99</p>
+            <button class="btn" onclick="addToCart('Street Wear')">Add to Cart</button>
         </div>
 
-        <!-- Product 5 -->
-        <div class="product" data-category="hoodies">
-            <img src="https://i.ibb.co/ycVYfhQK/Untitled-design-2.png" alt="Street Style Hoodie">
-            <h3>Street Style Hoodie</h3>
-            <p>$34.99</p>
-            <button class="btn" onclick="addToCart('Street Style Hoodie')">Add to Cart</button>
-        </div>
-        
-        <!-- Product 6 -->
+        <!-- Additional T-Shirts -->
         <div class="product" data-category="tshirts">
             <img src="https://i.ibb.co/xtjRSF0V/Untitled-design-4.png" alt="Graphic Tee">
             <h3>Graphic Tee</h3>
-            <p>$34.99</p>
+            <p>$39.99</p>
             <button class="btn" onclick="addToCart('Graphic Tee')">Add to Cart</button>
         </div>
-
     </div>
     <button class="btn" onclick="sortProducts('asc')">Sort by Price: Low to High</button>
     <button class="btn" onclick="sortProducts('desc')">Sort by Price: High to Low</button>
