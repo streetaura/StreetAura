@@ -96,19 +96,42 @@
             margin-bottom: 1rem;
         }
 
-        #checkout-btn {
-            margin-top: 2rem;
+        #cart-details {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #222;
             padding: 1rem;
-            background: #ff6347;
-            color: white;
-            border: none;
-            cursor: pointer;
             border-radius: 5px;
-            font-size: 18px;
+            max-width: 500px;
+            margin: auto;
         }
 
-        #checkout-btn:hover {
-            background: #ff4500;
+        .cart-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+            background-color: #333;
+            border-radius: 5px;
+        }
+
+        .cart-item img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .cart-item p {
+            margin: 0;
+        }
+
+        .cart-item .remove {
+            cursor: pointer;
+            color: red;
+            font-weight: bold;
         }
 
         @media (max-width: 768px) {
@@ -144,7 +167,7 @@
 <h1>Welcome to Street Aura</h1>
 <p>Discover the latest urban streetwear collections.</p>
 
-<!-- Swiper for showcasing collections -->
+<!-- Improved Swiper with navigation buttons -->
 <div class="swiper-container">
     <div class="swiper">
         <div class="swiper-wrapper">
@@ -159,70 +182,110 @@
     <div class="swiper-button-prev"></div>
 </div>
 
-<section id="categories">
-    <h2>Categories</h2>
-    <button class="btn" onclick="showCategory('tshirts')">T-Shirts</button>
-    <button class="btn" onclick="showCategory('all')">All</button>
-</section>
-
+<!-- Full Updated Product List -->
 <section id="shop">
     <h2>Shop Our Collection</h2>
     <div class="product-grid" id="productGrid">
-        <!-- T-Shirts -->
+        <!-- Product 1 -->
         <div class="product" data-category="tshirts">
-            <img src="https://i.ibb.co/Y4zZZ15k/Flying-is-my-cardio.png" alt="Flying is My Cardio">
+            <img src="https://i.ibb.co/yFvBrnBh/Untitled-design-1.png" alt="Flying is My Cardio">
             <h3>Flying is My Cardio</h3>
             <p>$39.99</p>
             <button class="btn" onclick="addToCart('Flying is My Cardio', 39.99)">Add to Cart</button>
         </div>
+        <!-- Product 2 -->
         <div class="product" data-category="tshirts">
-            <img src="https://i.ibb.co/s9DJKqkS/lim-edition.png" alt="Limited Edition">
+            <img src="https://i.ibb.co/xt3fCm7w/Untitled-design-2.png" alt="Untitled Design 2">
+            <h3>Untitled Design 2</h3>
+            <p>$39.99</p>
+            <button class="btn" onclick="addToCart('Untitled Design 2', 39.99)">Add to Cart</button>
+        </div>
+        <!-- Product 3 -->
+        <div class="product" data-category="tshirts">
+            <img src="https://i.ibb.co/Q3N1FDRs/Untitled-design-4.png" alt="Untitled Design 4">
+            <h3>Untitled Design 4</h3>
+            <p>$39.99</p>
+            <button class="btn" onclick="addToCart('Untitled Design 4', 39.99)">Add to Cart</button>
+        </div>
+        <!-- Product 4 -->
+        <div class="product" data-category="tshirts">
+            <img src="https://i.ibb.co/cKngKXWG/image.png" alt="Image">
+            <h3>Image</h3>
+            <p>$39.99</p>
+            <button class="btn" onclick="addToCart('Image', 39.99)">Add to Cart</button>
+        </div>
+        <!-- Product 5 -->
+        <div class="product" data-category="tshirts">
+            <img src="https://i.ibb.co/YBmXS3TZ/Untitled-design-3.png" alt="Untitled Design 3">
+            <h3>Untitled Design 3</h3>
+            <p>$39.99</p>
+            <button class="btn" onclick="addToCart('Untitled Design 3', 39.99)">Add to Cart</button>
+        </div>
+        <!-- Product 6 -->
+        <div class="product" data-category="tshirts">
+            <img src="https://i.ibb.co/MxwddD1H/Untitled-design.png" alt="Untitled Design">
+            <h3>Untitled Design</h3>
+            <p>$39.99</p>
+            <button class="btn" onclick="addToCart('Untitled Design', 39.99)">Add to Cart</button>
+        </div>
+        <!-- Product 7 -->
+        <div class="product" data-category="tshirts">
+            <img src="https://i.ibb.co/xt9ZZSgb/Untitled-design.png" alt="Graphic Design">
+            <h3>Graphic Design</h3>
+            <p>$39.99</p>
+            <button class="btn" onclick="addToCart('Graphic Design', 39.99)">Add to Cart</button>
+        </div>
+        <!-- Product 8 -->
+        <div class="product" data-category="tshirts">
+            <img src="https://i.ibb.co/x8g67sLB/Untitled-design-1.png" alt="Flying is My Cardio">
+            <h3>Flying is My Cardio</h3>
+            <p>$39.99</p>
+            <button class="btn" onclick="addToCart('Flying is My Cardio', 39.99)">Add to Cart</button>
+        </div>
+        <!-- Product 9 -->
+        <div class="product" data-category="tshirts">
+            <img src="https://i.ibb.co/HL77mzKN/Untitled-design-2.png" alt="Untitled Design 2">
+            <h3>Untitled Design 2</h3>
+            <p>$39.99</p>
+            <button class="btn" onclick="addToCart('Untitled Design 2', 39.99)">Add to Cart</button>
+        </div>
+        <!-- Product 10 -->
+        <div class="product" data-category="tshirts">
+            <img src="https://i.ibb.co/MDz9rb60/Untitled-design-3.png" alt="Untitled Design 3">
+            <h3>Untitled Design 3</h3>
+            <p>$39.99</p>
+            <button class="btn" onclick="addToCart('Untitled Design 3', 39.99)">Add to Cart</button>
+        </div>
+        <!-- Product 11 -->
+        <div class="product" data-category="tshirts">
+            <img src="https://i.ibb.co/Q7x4GKC7/Untitled-design.png" alt="Graphic Tee">
+            <h3>Graphic Tee</h3>
+            <p>$39.99</p>
+            <button class="btn" onclick="addToCart('Graphic Tee', 39.99)">Add to Cart</button>
+        </div>
+        <!-- Product 12 -->
+        <div class="product" data-category="tshirts">
+            <img src="https://i.ibb.co/8gR4r9T3/lim-edition.png" alt="Limited Edition">
             <h3>Limited Edition</h3>
             <p>$39.99</p>
             <button class="btn" onclick="addToCart('Limited Edition', 39.99)">Add to Cart</button>
         </div>
+        <!-- Product 13 -->
         <div class="product" data-category="tshirts">
-            <img src="https://i.ibb.co/rR4tHKMy/dino-tees.png" alt="Dino Tee">
-            <h3>Dino Tee</h3>
+            <img src="https://i.ibb.co/nNz0jqfk/dino-tees.png" alt="Dino Tees">
+            <h3>Dino Tees</h3>
             <p>$39.99</p>
-            <button class="btn" onclick="addToCart('Dino Tee', 39.99)">Add to Cart</button>
-        </div>
-        <div class="product" data-category="tshirts">
-            <img src="https://i.ibb.co/XJfntktS/fierce-fit-tee.png" alt="Fierce Fit">
-            <h3>Fierce Fit</h3>
-            <p>$39.99</p>
-            <button class="btn" onclick="addToCart('Fierce Fit', 39.99)">Add to Cart</button>
-        </div>
-        <div class="product" data-category="tshirts">
-            <img src="https://i.ibb.co/Gt5Nydw4/urban-vibes.png" alt="Urban Vibes">
-            <h3>Urban Vibes</h3>
-            <p>$39.99</p>
-            <button class="btn" onclick="addToCart('Urban Vibes', 39.99)">Add to Cart</button>
-        </div>
-        <div class="product" data-category="tshirts">
-            <img src="https://i.ibb.co/jrPYtwbX/retro-wave-tee.png" alt="Retro Wave Tee">
-            <h3>Retro Wave Tee</h3>
-            <p>$39.99</p>
-            <button class="btn" onclick="addToCart('Retro Wave Tee', 39.99)">Add to Cart</button>
-        </div>
-        <div class="product" data-category="tshirts">
-            <img src="https://i.ibb.co/B3sjfZyY/street-stripes.png" alt="Street Stripes">
-            <h3>Street Stripes</h3>
-            <p>$39.99</p>
-            <button class="btn" onclick="addToCart('Street Stripes', 39.99)">Add to Cart</button>
-        </div>
-        <div class="product" data-category="tshirts">
-            <img src="https://i.ibb.co/gzSzq2V2/vintage-edge.png" alt="Vintage Edge">
-            <h3>Vintage Edge</h3>
-            <p>$39.99</p>
-            <button class="btn" onclick="addToCart('Vintage Edge', 39.99)">Add to Cart</button>
+            <button class="btn" onclick="addToCart('Dino Tees', 39.99)">Add to Cart</button>
         </div>
     </div>
-    <button class="btn" onclick="sortProducts('asc')">Sort by Price: Low to High</button>
-    <button class="btn" onclick="sortProducts('desc')">Sort by Price: High to Low</button>
+</section>
 
-    <!-- Checkout Button -->
-    <button id="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+
+<!-- Cart Section -->
+<section id="cart">
+    <h2>Your Cart</h2>
+    <div id="cart-details"></div>
+    <button class="btn" onclick="checkout()">Proceed to Checkout</button>
 </section>
 
 <!-- Contact Us Section -->
@@ -237,75 +300,4 @@
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 <script>
-    const swiper = new Swiper('.swiper', {
-        loop: true,
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-        },
-        autoplay: {
-            delay: 3000,
-            disableOnInteraction: false,
-        },
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        }
-    });
-
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-    function addToCart(productName, productPrice) {
-        const product = {
-            name: productName,
-            price: productPrice
-        };
-        cart.push(product);
-        localStorage.setItem("cart", JSON.stringify(cart));
-        updateCartCount();
-    }
-
-    function updateCartCount() {
-        document.getElementById("cart-count").innerText = cart.length;
-    }
-
-    function viewCart() {
-        alert(JSON.stringify(cart, null, 2));
-    }
-
-    function checkout() {
-        if (cart.length === 0) {
-            alert("Your cart is empty.");
-        } else {
-            alert("Proceeding to checkout.");
-        }
-    }
-
-    function showCategory(category) {
-        const products = document.querySelectorAll('.product');
-        products.forEach(product => {
-            if (category === 'all' || product.dataset.category === category) {
-                product.style.display = 'block';
-            } else {
-                product.style.display = 'none';
-            }
-        });
-    }
-
-    function sortProducts(order) {
-        const productGrid = document.getElementById('productGrid');
-        const products = Array.from(productGrid.children);
-        products.sort((a, b) => {
-            const priceA = parseFloat(a.querySelector('p').textContent.replace('$', ''));
-            const priceB = parseFloat(b.querySelector('p').textContent.replace('$', ''));
-            return order === 'asc' ? priceA - priceB : priceB - priceA;
-        });
-        productGrid.innerHTML = '';
-        products.forEach(product => productGrid.appendChild(product));
-    }
-
-    updateCartCount();
-</script>
-
-</body>
-</html>
+    const swiper = new Swiper('.swiper
