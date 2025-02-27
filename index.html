@@ -52,13 +52,14 @@
 
         .product-grid {
             display: flex;
-            flex-wrap: wrap;
             gap: 1rem;
             justify-content: center;
+            overflow-x: scroll; /* Enables horizontal scrolling */
+            margin-bottom: 2rem;
         }
 
         .product {
-            width: 200px;
+            min-width: 200px;
             background: #111;
             padding: 1rem;
             border: 2px solid #fff;
@@ -97,10 +98,27 @@
             .product-grid {
                 flex-direction: column;
                 align-items: center;
+                overflow-x: hidden;
             }
             .swiper {
                 height: 200px;
             }
+        }
+
+        #about {
+            background: #111;
+            padding: 2rem;
+            margin-top: 3rem;
+            display: none; /* Hidden by default */
+        }
+
+        #about h2 {
+            margin-bottom: 1rem;
+        }
+
+        #about p {
+            max-width: 800px;
+            margin: 0 auto;
         }
     </style>
 </head>
@@ -112,7 +130,7 @@
     <div class="nav-links">
         <a href="#shop">Shop</a>
         <a href="#categories">Categories</a>
-        <a href="#about">About</a>
+        <a href="#" onclick="showAbout()">About</a>
     </div>
     <div class="cart">
         <a href="#" onclick="viewCart()">Cart (<span id="cart-count">0</span>)</a>
@@ -157,6 +175,11 @@
     </div>
     <button class="btn" onclick="sortProducts('asc')">Sort by Price: Low to High</button>
     <button class="btn" onclick="sortProducts('desc')">Sort by Price: High to Low</button>
+</section>
+
+<section id="about">
+    <h2>About Street Aura</h2>
+    <p>Street Aura is more than just a brand—it's a movement. Our clothing blends urban street culture with contemporary fashion, offering bold designs and high-quality fabrics for the trendsetters. Whether you're rocking a graphic tee or a sleek hoodie, Street Aura has the pieces to elevate your look and make a statement. Join us in shaping the future of streetwear.</p>
 </section>
 
 <footer>
@@ -215,6 +238,11 @@
             return order === 'asc' ? priceA - priceB : priceB - priceA;
         });
         products.forEach(product => productGrid.appendChild(product)); // Re-order the products
+    }
+
+    function showAbout() {
+        const aboutSection = document.getElementById('about');
+        aboutSection.style.display = aboutSection.style.display === 'block' ? 'none' : 'block';
     }
 
     // Show all products initially
