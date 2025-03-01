@@ -516,24 +516,29 @@ clickable: true,
             const cartContainer = document.getElementById('cart');
             cartContainer.style.display = cartContainer.style.display === 'block' ? 'none' : 'block';
         }
+    
+function goToCheckout() {
+    document.getElementById('checkoutPage').style.display = 'block'; // Show checkout page
+    document.getElementById('cart').style.display = 'none'; // Hide cart
+}
 
-        // Show Checkout page when clicking Proceed to Checkout button
-        function goToCheckout() {
-            document.getElementById('checkoutPage').style.display = 'block';
-            document.getElementById('cart').style.display = 'none';
-        }
+function exitCheckout() {
+    document.getElementById('checkoutPage').style.display = 'none'; // Hide checkout page
+    document.getElementById('cart').style.display = 'block'; // Show cart
+}
 
-        // Hide Checkout page and go back to Cart
-        function exitCheckout() {
-            document.getElementById('checkoutPage').style.display = 'none';
-            document.getElementById('cart').style.display = 'block';
-        }
-
-        // Handle form submission (mock checkout)
-        document.getElementById('checkoutForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            alert('Thank you for your purchase! Your order will be processed soon.');
-        });
-</script>
-</body>
-</html>
+// Handle form submission (mock checkout)
+document.getElementById('checkoutForm').addEventListener('submit', function(event) {
+    event.preventDefault();  // Prevent actual form submission
+    alert('Thank you for your purchase! Your order will be processed soon.');
+    // Optionally, clear the cart after successful checkout
+    cart = [];
+    updateCart();
+    document.getElementById('checkoutPage').style.display = 'none';  // Hide checkout page
+    document.getElementById('cart').style.display = 'none';  // Hide cart if needed
+    document.getElementById('notification').textContent = 'Order placed successfully!';
+    document.getElementById('notification').classList.add('show');
+    setTimeout(() => {
+        document.getElementById('notification').classList.remove('show');
+    }, 3000);
+});
