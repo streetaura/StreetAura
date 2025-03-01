@@ -101,7 +101,7 @@ width: auto;
 height: auto;
 max-width: 80%;
 max-height: 80%;
-object-fit: contain; /* Keeps aspect ratio intact */
+object-fit: contain;
 border-radius: 10px;
 }
 
@@ -282,10 +282,10 @@ visibility: visible;
 <div class="swiper-button-next"></div>
 <div class="swiper-button-prev"></div>
 </div>
-    
+
 <!-- Cart Button with item count -->
 <div id="cartButton" onclick="toggleCart()">
-    🛒 <span id="cartItemCount">0</span> items
+🛒 <span id="cartItemCount">0</span> items
 </div>
 
 
@@ -426,169 +426,130 @@ visibility: visible;
         <button onclick="goToCheckout()">Proceed to Checkout</button>
     </div>
 
+
     <!-- Checkout Page -->
-    <div id="checkoutPage">
-        <h2>Checkout Page</h2>
+    <div id="checkoutPage" class="checkout-container" style="display: none;">
+        <h2>Checkout</h2>
         <form id="checkoutForm">
             <input type="text" placeholder="Name" required>
             <input type="email" placeholder="Email" required>
-            <button type="submit">Submit Order</button>
+            <input type="text" placeholder="Address" required>
+            <select required>
+                <option value="credit-card">Credit Card</option>
+                <option value="paypal">PayPal</option>
+            </select>
+            <button type="submit" class="btn" onclick="processCheckout(event)">Complete Purchase</button>
         </form>
-        <button onclick="exitCheckout()">Exit Checkout</button>
+        <button class="btn" onclick="exitCheckout()">Exit Checkout</button>
     </div>
-    
-    <!-- Checkout Items Section -->
-<div id="checkoutItems"></div>
 
+    <!-- Cart Page -->
+    <div id="cart" class="cart-container">
+        <h2>Cart</h2>
+        <div id="cartItems">
+            <!-- Cart items will be displayed here -->
+        </div>
+        <button class="btn" id="checkoutButton" onclick="goToCheckout()">Proceed to Checkout</button>
+        <button class="btn" onclick="toggleCart()">Close Cart</button>
+    </div>
 
+    <!-- Notification for Add to Cart -->
+    <div id="notification">Item added to cart</div>
 
-<!-- Notification -->
-<div id="notification">Product added to cart!</div>
+    <!-- Modal for Viewing Images -->
+    <div id="imageModal" onclick="closeModal()">
+        <span id="modalClose" onclick="closeModal()">X</span>
+        <img id="modalImage" src="" alt="Product Image">
+    </div>
 
-<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-<script>
-const swiper = new Swiper('.swiper-container', {
-slidesPerView: 3,
-spaceBetween: 10,
-autoplay: {
-delay: 3000, // 3 seconds
-disableOnInteraction: false, // Keeps autoplay even after user interaction
-},
-navigation: {
-nextEl: '.swiper-button-next',
-prevEl: '.swiper-button-prev',
-},
-pagination: {
-el: '.swiper-pagination',
-clickable: true,
-},
-});
-    
-let cart = [];
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script>
+        // Initialize Swiper for slideshow
+        const swiper = new Swiper('.swiper-container', {
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
 
-function addToCart(event, productName, productPrice, productImage) {
-    event.stopPropagation();
-    cart.push({
-        name: productName,
-        price: productPrice,
-        image: productImage
-    });
-    updateCart();
-    showNotification(productName);  
-}
+        // Cart and Checkout
+        let cart = [];
+        let cartItemCount = 0;
 
-function updateCart() {
-    const cartItemCount = document.getElementById('cartItemCount');
-    const cartItemsContainer = document.getElementById('cart-items');
-    
-    // Update the item count in the cart button
-    cartItemCount.textContent = cart.length;
-    
-    // Clear current cart display
-    cartItemsContainer.innerHTML = '';
-    
-    // Update cart items list
-    cart.forEach(item => {
-        const cartItem = document.createElement('div');
-        cartItem.className = 'cart-item';
-        cartItem.innerHTML = `
-            <img src="${item.image}" alt="${item.name}" width="50">
-            <p>${item.name}</p>
-            <p>$${item.price.toFixed(2)}</p>
-        `;
-        cartItemsContainer.appendChild(cartItem);
-    });
-}
+        function toggleCart() {
+            const cartElement = document.getElementById('cart');
+            cartElement.style.display = cartElement.style.display === 'block' ? 'none' : 'block';
+        }
 
-function showNotification(productName) {
-    const notification = document.getElementById('notification');
-    notification.textContent = `${productName} added to cart!`;
-    notification.classList.add('show');
+        function addToCart(event, name, price, image) {
+            event.stopPropagation();
+            cart.push({ name, price, image });
+            cartItemCount++;
+            document.getElementById('cartItemCount').innerText = cartItemCount;
+            updateCart();
+            showNotification("Item added to cart");
+        }
 
-    setTimeout(() => {
-        notification.classList.remove('show');
-    }, 3000);
-}
+        function updateCart() {
+            const cartItems = document.getElementById('cartItems');
+            cartItems.innerHTML = '';
+            cart.forEach(item => {
+                cartItems.innerHTML += `
+                    <div class="cart-item">
+                        <p>${item.name}</p>
+                        <p>$${item.price}</p>
+                    </div>
+                `;
+            });
+        }
 
-function openModal(imageSrc) {
-    const modal = document.getElementById('imageModal');
-    const modalImage = document.getElementById('modalImage');
-    modalImage.src = imageSrc;
-    modal.style.display = 'flex';
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.innerText = message;
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
 
-    modalImage.classList.add('expanded');
-}
+        function goToCheckout() {
+            document.getElementById('cart').style.display = 'none';
+            document.getElementById('checkoutPage').style.display = 'block';
+        }
 
-function closeModal() {
-    const modal = document.getElementById('imageModal');
-    modal.style.display = 'none';
+        function exitCheckout() {
+            document.getElementById('checkoutPage').style.display = 'none';
+            document.getElementById('cart').style.display = 'block';
+        }
 
-    const modalImage = document.getElementById('modalImage');
-    modalImage.classList.remove('expanded');
-}
+        function openModal(imageSrc) {
+            document.getElementById('imageModal').style.display = 'flex';
+            document.getElementById('modalImage').src = imageSrc;
+        }
 
-function toggleCart() {
-    const cartContainer = document.getElementById('cart');
-    cartContainer.style.display = cartContainer.style.display === 'block' ? 'none' : 'block';
-}
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
 
-// Function to go to checkout
-function goToCheckout() {
-    const checkoutItemsContainer = document.getElementById('checkoutItems');
-    checkoutItemsContainer.innerHTML = '';  // Clear previous items
-
-    cart.forEach(item => {
-        const itemDiv = document.createElement('div');
-        itemDiv.className = 'checkout-item';
-        itemDiv.innerHTML = `
-            <img src="${item.image}" alt="${item.name}" width="50">
-            <p>${item.name}</p>
-            <p>$${item.price.toFixed(2)}</p>
-        `;
-        checkoutItemsContainer.appendChild(itemDiv);
-    });
-
-    document.getElementById('checkoutPage').style.display = 'block'; // Show checkout page
-    document.getElementById('cart').style.display = 'none'; // Hide cart
-}
-
-// Function to exit the checkout page
-function exitCheckout() {
-    document.getElementById('checkoutPage').style.display = 'none'; // Hide checkout page
-    document.getElementById('cart').style.display = 'block'; // Show cart
-}
-
-// Checkout form submit event
-document.getElementById('checkoutForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-
-    const name = document.querySelector('input[type="text"]').value;
-    const email = document.querySelector('input[type="email"]').value;
-
-    if (!name || !email) {
-        alert('Please fill in all the fields.');
-        return;
-    }
-
-    // Process order logic
-    alert('Thank you for your purchase! Your order will be processed soon.');
-
-    // Optionally, clear the cart after successful checkout
-    cart = [];
-    updateCart(); // Update the UI to reflect an empty cart
-
-    // Hide the checkout and cart pages
-    document.getElementById('checkoutPage').style.display = 'none';
-    document.getElementById('cart').style.display = 'none'; // If needed
-
-    // Show success notification
-    document.getElementById('notification').textContent = 'Order placed successfully!';
-    document.getElementById('notification').classList.add('show');
-    setTimeout(() => {
-        document.getElementById('notification').classList.remove('show');
-    }, 3000);
-});
-
+        function processCheckout(event) {
+            event.preventDefault();
+            alert('Checkout completed');
+            cart = [];
+            cartItemCount = 0;
+            document.getElementById('cartItemCount').innerText = cartItemCount;
+            document.getElementById('cart').style.display = 'none';
+            document.getElementById('checkoutPage').style.display = 'none';
+                 document.getElementById('notification').innerText = 'Thank you for your purchase!';
+            document.getElementById('notification').classList.add('show');
+            setTimeout(() => {
+                document.getElementById('notification').classList.remove('show');
+            }, 3000);
+        }
+        
     </script>
 </body>
 </html>
