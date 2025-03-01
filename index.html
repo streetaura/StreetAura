@@ -282,9 +282,12 @@ visibility: visible;
 <div class="swiper-button-next"></div>
 <div class="swiper-button-prev"></div>
 </div>
+    
+<!-- Cart Button with item count -->
+<div id="cartButton" onclick="toggleCart()">
+    🛒 <span id="cartItemCount">0</span> items
+</div>
 
-<!-- Cart Button -->
-<div id="cartButton" onclick="toggleCart()">🛒</div>
 
 <section id="shop">
 <h2>Shop Our Collection</h2>
@@ -433,6 +436,10 @@ visibility: visible;
         </form>
         <button onclick="exitCheckout()">Exit Checkout</button>
     </div>
+    
+    <!-- Checkout Items Section -->
+<div id="checkoutItems"></div>
+
 
 
 <!-- Notification -->
@@ -456,92 +463,132 @@ el: '.swiper-pagination',
 clickable: true,
 },
 });
-
-      let cart = [];
-
-        function addToCart(event, productName, productPrice, productImage) {
-            event.stopPropagation();
-            cart.push({
-                name: productName,
-                price: productPrice,
-                image: productImage
-            });
-            updateCart();
-            showNotification(productName);  
-        }
-
-        function updateCart() {
-            const cartItemsContainer = document.getElementById('cart-items');
-            cartItemsContainer.innerHTML = '';
-            cart.forEach(item => {
-                const itemDiv = document.createElement('div');
-                itemDiv.className = 'cart-item';
-                itemDiv.innerHTML = `
-                    <img src="${item.image}" alt="${item.name}" width="50">
-                    <p>${item.name}</p>
-                    <p>$${item.price.toFixed(2)}</p>
-                `;
-                cartItemsContainer.appendChild(itemDiv);
-            });
-        }
-
-        function showNotification(productName) {
-            const notification = document.getElementById('notification');
-            notification.textContent = `${productName} added to cart!`;
-            notification.classList.add('show');
-
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
-        }
-
-        function openModal(imageSrc) {
-            const modal = document.getElementById('imageModal');
-            const modalImage = document.getElementById('modalImage');
-            modalImage.src = imageSrc;
-            modal.style.display = 'flex';
-
-            modalImage.classList.add('expanded');
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('imageModal');
-            modal.style.display = 'none';
-
-            const modalImage = document.getElementById('modalImage');
-            modalImage.classList.remove('expanded');
-        }
-
-        function toggleCart() {
-            const cartContainer = document.getElementById('cart');
-            cartContainer.style.display = cartContainer.style.display === 'block' ? 'none' : 'block';
-        }
     
+let cart = [];
+
+function addToCart(event, productName, productPrice, productImage) {
+    event.stopPropagation();
+    cart.push({
+        name: productName,
+        price: productPrice,
+        image: productImage
+    });
+    updateCart();
+    showNotification(productName);  
+}
+
+function updateCart() {
+    const cartItemCount = document.getElementById('cartItemCount');
+    const cartItemsContainer = document.getElementById('cart-items');
+    
+    // Update the item count in the cart button
+    cartItemCount.textContent = cart.length;
+    
+    // Clear current cart display
+    cartItemsContainer.innerHTML = '';
+    
+    // Update cart items list
+    cart.forEach(item => {
+        const cartItem = document.createElement('div');
+        cartItem.className = 'cart-item';
+        cartItem.innerHTML = `
+            <img src="${item.image}" alt="${item.name}" width="50">
+            <p>${item.name}</p>
+            <p>$${item.price.toFixed(2)}</p>
+        `;
+        cartItemsContainer.appendChild(cartItem);
+    });
+}
+
+function showNotification(productName) {
+    const notification = document.getElementById('notification');
+    notification.textContent = `${productName} added to cart!`;
+    notification.classList.add('show');
+
+    setTimeout(() => {
+        notification.classList.remove('show');
+    }, 3000);
+}
+
+function openModal(imageSrc) {
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    modalImage.src = imageSrc;
+    modal.style.display = 'flex';
+
+    modalImage.classList.add('expanded');
+}
+
+function closeModal() {
+    const modal = document.getElementById('imageModal');
+    modal.style.display = 'none';
+
+    const modalImage = document.getElementById('modalImage');
+    modalImage.classList.remove('expanded');
+}
+
+function toggleCart() {
+    const cartContainer = document.getElementById('cart');
+    cartContainer.style.display = cartContainer.style.display === 'block' ? 'none' : 'block';
+}
+
+// Function to go to checkout
 function goToCheckout() {
+    const checkoutItemsContainer = document.getElementById('checkoutItems');
+    checkoutItemsContainer.innerHTML = '';  // Clear previous items
+
+    cart.forEach(item => {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'checkout-item';
+        itemDiv.innerHTML = `
+            <img src="${item.image}" alt="${item.name}" width="50">
+            <p>${item.name}</p>
+            <p>$${item.price.toFixed(2)}</p>
+        `;
+        checkoutItemsContainer.appendChild(itemDiv);
+    });
+
     document.getElementById('checkoutPage').style.display = 'block'; // Show checkout page
     document.getElementById('cart').style.display = 'none'; // Hide cart
 }
 
+// Function to exit the checkout page
 function exitCheckout() {
     document.getElementById('checkoutPage').style.display = 'none'; // Hide checkout page
     document.getElementById('cart').style.display = 'block'; // Show cart
 }
 
-// Handle form submission (mock checkout)
+// Checkout form submit event
 document.getElementById('checkoutForm').addEventListener('submit', function(event) {
-    event.preventDefault();  // Prevent actual form submission
+    event.preventDefault();
+
+    const name = document.querySelector('input[type="text"]').value;
+    const email = document.querySelector('input[type="email"]').value;
+
+    if (!name || !email) {
+        alert('Please fill in all the fields.');
+        return;
+    }
+
+    // Process order logic
     alert('Thank you for your purchase! Your order will be processed soon.');
+
     // Optionally, clear the cart after successful checkout
     cart = [];
-    updateCart();
-    document.getElementById('checkoutPage').style.display = 'none';  // Hide checkout page
-    document.getElementById('cart').style.display = 'none';  // Hide cart if needed
+    updateCart(); // Update the UI to reflect an empty cart
+
+    // Hide the checkout and cart pages
+    document.getElementById('checkoutPage').style.display = 'none';
+    document.getElementById('cart').style.display = 'none'; // If needed
+
+    // Show success notification
     document.getElementById('notification').textContent = 'Order placed successfully!';
     document.getElementById('notification').classList.add('show');
     setTimeout(() => {
         document.getElementById('notification').classList.remove('show');
     }, 3000);
 });
-</script>
+
+    </script>
 </body>
 </html>
